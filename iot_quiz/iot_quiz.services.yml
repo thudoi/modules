@@ -1,0 +1,13 @@
+services:
+ iot_quiz.quizservice:
+   class: Drupal\iot_quiz\QuizService
+ iot_quiz.userservice:
+   class: Drupal\iot_quiz\UserService
+ iot_quiz.collectionservice:
+    class: Drupal\iot_quiz\CollectionService
+ iot_quiz.scoreservice:
+    class: Drupal\iot_quiz\ScoreService
+ iot_quiz.questionservice:
+    class: Drupal\iot_quiz\QuestionService
+ iot_quiz.explainservice:
+    class: Drupal\iot_quiz\ExplainService

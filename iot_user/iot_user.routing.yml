@@ -1,0 +1,87 @@
+
+iot_user.dashboard_controller_profile:
+  path: '/account/profile'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\DashboardController::profile'
+    _title: 'My Profile'
+  requirements:
+    _permission: 'access content'
+
+iot_user.dashboard_controller_profile_callback:
+  path: '/account/update/profile'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\DashboardController::profileCallback'
+    _title: 'My Profile'
+  requirements:
+    _permission: 'access content'
+
+iot_user.user_profile_login:
+  path: '/account/login'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::login'
+    _title: 'Log in to your account'
+  requirements:
+    _permission: 'access content'
+iot_user.user_profile_login_verify:
+  path: '/account/login/verify'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::loginVerify'
+    _title: 'Log in to your account'
+  requirements:
+    _permission: 'access content'
+
+iot_user.user_profile_register:
+  path: '/account/register'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::register'
+    _title: 'Sign up new account '
+  requirements:
+    _permission: 'access content'
+
+iot_user.user_profile_build:
+  path: '/account/build/profile'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::buildProfile'
+    _title: 'Build Profile '
+  requirements:
+    _permission: 'access content'
+
+iot_user.user_profile_callback:
+  path: '/account/profile/callback'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::buildProfileCallback'
+    _title: 'Build Profile '
+  requirements:
+    _permission: 'access content'
+
+iot_user.user_profile_login_callback:
+  path: '/account/login/callback'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::loginCallback'
+    _title: 'Log in to your account'
+  requirements:
+    _permission: 'access content'
+
+iot_user.user_profile_register_callback:
+  path: '/account/register/callback'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\UserProfileController::registerCallback'
+    _title: 'Sign up new account'
+  requirements:
+    _permission: 'access content'
+
+iot_user.dashboard_controller_analytics:
+  path: '/account/analytics'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\AnalyticsController::dashboard'
+    _title: 'My Analytics'
+  requirements:
+    _permission: 'access content'
+
+iot_user.dashboard_controller_history:
+  path: '/account/history'
+  defaults:
+    _controller: '\Drupal\iot_user\Controller\DashboardController::history'
+    _title: 'My History'
+  requirements:
+    _permission: 'access content'

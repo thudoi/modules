@@ -1,0 +1,38 @@
+<div class="content">
+  <h2 class="title">{{ node.title.value }}</h2>
+</div>
+<div class="practice">
+
+  <a class="use-ajax btn btn-primary" data-dialog-type="modal"
+     href="/node/add/section?sid={{ node.nid.value }}&type={{ type }}&destination=/set/{{ node.nid.value }}/{{ type }}/manage"> {{ 'Add Section'|t }}</a>
+  <a class="btn btn-info"
+     href="/collection/{{ node.field_collection.target_id }}/manage">{{ 'Back to Collection Manager'|t }}</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'Section Title'|t }}</th>
+      <th>{{ 'Question Type'|t }}</th>
+      <th>{{ 'Manage Questions'|t }}</th>
+      <th colspan=2>{{ 'Actions'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sec in secs %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ sec.title.value }}</td>
+        <td style="text-transform: uppercase">{{ type }}</td>
+        <td><a class="btn btn-primary"
+               href="/question/{{ sec.nid.value }}/{{ type }}/manage">{{ 'Manage Questions'|t }}</a></td>
+        <td><a class="use-ajax btn btn-success" data-dialog-type="modal"
+               href="/node/{{ sec.nid.value }}/edit?destination=/set/{{ node.nid.value }}/{{ type }}/manage">{{ 'Edit'|t }}</a>
+        </td>
+        <td><a class="use-ajax btn btn-danger" data-dialog-type="modal"
+               href="/node/{{ sec.nid.value }}/delete?destination=/set/{{ node.nid.value }}/{{ type }}/manage">{{ 'Delete'|t }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

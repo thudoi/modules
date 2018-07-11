@@ -1,0 +1,25 @@
+<ul class="col-md-6 list-answer {{ class }}">
+  {% for res in result %}
+  <li class="{{ res.num|length>3? 'qp-item-large qp-item': 'qp-item' }}">
+                        <span>
+                            {% if(res.num|length>3) %}
+                              {% set foo = res.num|split('-') %}
+                              {{ foo.0 }}
+                              <em></em>
+                              {{ foo.1 }}
+                            {% else %}
+                              {{ res.num }}
+                            {% endif %}
+                        </span>
+    {{ res.correct_ans }}
+    {% if(type=='result') %}
+      : {{ res.ans }}
+      <em class="{{ res.correct==1? 'true':'false' }}"></em>
+    {% endif %}
+  </li>
+  {% if loop.index == ((result|length)/2)|round %}
+</ul>
+<ul class="col-md-6 list-answer {{ class }}">
+  {% endif %}
+  {% endfor %}
+</ul>

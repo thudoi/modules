@@ -1,0 +1,7 @@
+name: IOT Question
+type: module
+description: 'Upload and view interactive HTML5 Packages to your site.'
+package: IOT Project
+core: 8.x
+dependencies:
+  - field

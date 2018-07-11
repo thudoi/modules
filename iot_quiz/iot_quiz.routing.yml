@@ -1,0 +1,56 @@
+quiz.solution:
+  path: '/node/{node}/solution'
+  defaults:
+    _title: 'Solution for test'
+    _controller: '\Drupal\iot_quiz\Controller\QuizController::ShowSolution'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  requirements:
+    _access: 'TRUE'
+quiz.print_download:
+  path: '/node/{node}/print/action'
+  defaults:
+    _controller: '\Drupal\iot_quiz\Controller\PrintController::printDownload'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  requirements:
+    _access: 'TRUE'
+quiz.print_download_action:
+  path: '/node/{node}/print'
+  defaults:
+    _controller: '\Drupal\iot_quiz\Controller\PrintController::printDownloadAction'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  requirements:
+    _access: 'TRUE'
+quiz.mapping:
+ path: '/admin/config/content/mapping'
+ defaults:
+   _title: 'Mapping Result'
+   _form: '\Drupal\iot_quiz\Form\MappingForm'
+ requirements:
+   _permission: 'access content'
+
+quiz.explain:
+  path: '/iot-test/{node}/explain'
+  defaults:
+    _controller: '\Drupal\iot_quiz\Controller\QuizController::ExplainQuestion'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  requirements:
+    _access: 'TRUE'
+quiz.collections:
+  path: '/ielts-exam-library'
+  defaults:
+    _title: 'IELTS Exam Library'
+    _controller: '\Drupal\iot_quiz\Controller\CollectionController::Collections'
+  requirements:
+    _access: 'TRUE'

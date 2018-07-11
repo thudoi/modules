@@ -1,0 +1,22 @@
+radios_option:
+  version: VERSION
+  js:
+      js/radios-option.js: {}
+  css:
+    layout:
+      css/custom-block.css: {}
+contact_form:
+  version: VERSION
+  js:
+      js/contact_form.js: {}
+report_mistake:
+  version: VERSION
+  js:
+      js/report_mistake.js: {}
+report_mistake_view:
+  version: VERSION
+  js:
+      js/report_mistake.js: {}
+  css:
+    layout:
+      css/report_admin.css: {}

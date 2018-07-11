@@ -1,0 +1,8 @@
+iot_analytics:
+  version: VERSION
+  js:
+      js/charts_action.js: {}
+iot_account:
+  version: VERSION
+  js:
+      js/account.js: {}

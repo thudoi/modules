@@ -1,0 +1,152 @@
+.ui-widget-content {
+  width: 1000px !important;
+}
+
+.preload {
+  display: none;
+}
+
+p {
+  font-size: 12px;
+}
+
+body {
+  font-size: 13px;
+}
+
+.col-sm-4 {
+  float: left;
+  width: 30%;
+}
+
+.col-sm-3 {
+  float: left;
+  width: 25%;
+}
+
+.col-sm-8 {
+  float: left;
+  width: 70%;
+}
+
+.col-sm-2 {
+  float: left;
+  width: 20%;
+}
+
+.col-sm-6 {
+  float: left;
+  width: 50%;
+}
+
+.col-sm-5 {
+  float: left;
+  width: 37%;
+}
+
+.col-sm-10 {
+  float: left;
+  width: 80%;
+}
+
+.col-sm-5 {
+  float: left;
+  width: 35%;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.ui-dialog .ui-widget-content.ui-dialog-content {
+  padding: 10px 0px 10px 0px !important;
+}
+
+#modal-report-mistake {
+  padding: 10px 20px;
+}
+
+#modal-report-mistake p {
+  padding: 5px;
+  margin: 0px;
+}
+
+#modal-report-mistake .content {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.col-sm-12 {
+  width: 100%;
+  float: left;
+}
+
+#modal-report-mistake input {
+  width: 100%;
+  height: 22px;
+  padding: 0px 5px;
+  margin-bottom: 15px;
+}
+
+#modal-report-mistake textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bp-control button {
+  display: inline-block;
+  cursor: pointer;
+  line-height: 30px;
+  padding: 0px 40px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  color: #fff;
+  background-color: #284664;
+  -moz-transition: all ease 0.2s;
+  -o-transition: all ease 0.2s;
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+}
+
+.bp-control a {
+  display: inline-block;
+  cursor: pointer;
+  line-height: 30px;
+  padding: 0px 40px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  color: #fff;
+  background-color: #284664;
+  -moz-transition: all ease 0.2s;
+  -o-transition: all ease 0.2s;
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+}
+
+.bp-control button:hover, .bp-control a:hover {
+  background-color: #2f5376;
+}
+
+i.required {
+  color: red;
+}
+
+.right-message .error {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.right-message .success {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

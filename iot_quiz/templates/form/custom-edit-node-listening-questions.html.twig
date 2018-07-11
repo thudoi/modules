@@ -1,0 +1,29 @@
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+<div class="listening-wrapper">
+  <div class="listening-content">
+    {% if form.title %}
+      {{ form.title }}
+      {{ form.field_audio }}
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#field_audio_script">{{ 'Audio script'|t }}</a></li>
+        <li><a data-toggle="tab" href="#field_subtitle">{{ 'Subtitle'|t }}</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="field_audio_script" class="tab-pane fade in active">
+          {{ form.field_audio_script }}
+        </div>
+        <div id="field_subtitle" class="tab-pane fade ">
+          {{ form.field_subtitle }}
+        </div>
+      </div>
+    {% endif %}
+    {{ form.field_listening_questions }}
+  </div>
+  {{ form.footer }}
+  <div class="action">
+    {{ form.actions }}
+  </div>
+</div>
+

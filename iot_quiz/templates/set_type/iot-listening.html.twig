@@ -1,0 +1,154 @@
+{{ popup_solution }}
+{{ popup_expired }}
+{{ popup_submit }}
+
+<div class="container">
+  <div class="listening-page">
+    <div class="lp-left">
+      <div class="player-listening player player-fixed">
+        <audio id="audio-player" class="progression-single progression-skin progression-audio-player"
+               controls="controls" preload="none">
+          <source src="{{ audio }}" type="audio/mp3"/>
+        </audio>
+      </div>
+      <div class="split-left cyan" id="HTMLtoPDF">
+
+        {% for sec in secs %}
+          <div class="sl-caption">
+            <span>{{ sec.section.field_title_ui.value }}: {{ sec.section.field_question_range.value }}</span>
+          </div>
+          <div class="sec-content-{{ loop.index }} ">
+            {% for question in sec.questions %}
+              <div class="question question-{{ loop.index }}">
+                <div class="collapse nodepad" aria-expanded="true"
+                     id="nodepad{{ loop.parent.loop.index }}{{ loop.index }}">
+                  <textarea placeholder="{{ 'Your draft goes here...'|t }}"></textarea>
+                </div>
+                <div class="sl-caption">
+                  <div class="sl-caption-right">
+                    {#<em>Updated Just Now</em>#}
+                    <a class="btn-show-note " data-toggle="collapse"
+                       data-target="#nodepad{{ loop.parent.loop.index }}{{ loop.index }}" href="javascript:void(0)"
+                       aria-expanded="true">
+                      <strong></strong>
+                      {{ 'Show Notepad'|t }}
+                    </a>
+                  </div>
+                </div>
+                {{ question.content|raw }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <div class="box-ad728 hidden-sm hidden-xs">
+          <img alt="" src="/themes/iot/images/a2.png">
+
+        </div>
+
+        <div class="end-the-test">
+          <h3>{{ 'End of the Test'|t }}</h3>
+          {% if logged_in %}
+            <a href="#" class="btn-submit" data-toggle="modal" data-target="#modal-submit">
+              <span class="icon-submit"></span>
+              {{ 'Submit'|t }}
+            </a>
+          {% else %}
+            <a class="use-ajax btn-submit" data-dialog-type="modal"
+               href="/account/login?destination={{ url('<current>') }}&submit=true">
+              <span class="icon-submit"></span>
+              {{ 'Submit'|t }}
+            </a>
+          {% endif %}
+          <br/>
+          <a class="use-ajax" data-dialog-type="modal" href="/report/{{ node.nid.value }}/mistake"
+             class="report">{{ 'Report Mistake'|t }}</a>
+        </div>
+
+      </div>
+    </div>
+    <div class="lp-right">
+      <div class="box-ads hidden-sm hidden-xs">
+        <img alt="" src="/themes/iot/images/a1.png">
+      </div>
+
+      <div id="qp-afix">
+
+        <div class="reading-footer cyan ">
+          <div class="question-panel">
+            <div class="qp-caption">
+              <span><em></em> {{ 'Question Pallete'|t }}</span>
+            </div>
+            <div class="qp-items">
+              {% for sec in secs %}
+                {% for question in sec.questions %}
+                  {% for q in question.question %}
+                    <a
+                      class="qp-item qp-item-{{ q.q_number }} {{ q.q_number|length>3? 'qp-item-large': '' }} qp-item-unanswered"
+                      data-q="q-{{ q.q_number }}">
+                      {% if(q.q_number|length>3) %}
+                        {% set foo = q.q_number|split('-') %}
+                        {{ foo.0 }}
+                        <em></em>
+                        {{ foo.1 }}
+                      {% else %}
+                        {{ q.q_number }}
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+            <div class="qp-note">
+              <span><em></em>{{ 'Answered'|t }} </span>
+              <span><em class="unanswered"></em>{{ 'Unanswered'|t }} </span>
+            </div>
+          </div>
+          <div class="rf-button-wrap">
+            <a class="rf-button hidden-lg hidden-md hidden-sm rf-button-pallete">
+              <span class="icon-pallete"></span>
+              {{ 'Question Pallete'|t }}
+            </a>
+            <a href="#" class="rf-button" data-toggle="modal" data-target="#modal-solution">
+              <span class="icon-review"></span>
+              {{ 'Review'|t }}
+            </a>
+            <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}/solution" class="rf-button">
+              <span class="icon-solution"></span>
+              {{ 'Solution'|t }}
+            </a>
+            {% if logged_in %}
+              <a href="#" class="rf-button" data-toggle="modal" data-target="#modal-submit">
+                <span class="icon-submit"></span>
+                {{ 'Submit'|t }}
+              </a>
+            {% else %}
+              <a class="use-ajax rf-button" data-dialog-type="modal"
+                 href="/account/login?destination={{ url('<current>') }}&submit=true">
+                <span class="icon-submit"></span>
+                {{ 'Submit'|t }}
+              </a>
+            {% endif %}
+          </div>
+          <div class="rf-time">
+            <div class="icon-time">
+            </div>
+            <input type="hidden" value="{{ node.field_duration.value ? node.field_duration.value : '00:00' }}"
+                   class="innertimmer"/>
+            <span id="stopwatch">
+                        --:--
+                    </span>
+
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+  </div>
+</div>
+<input type="hidden" value="reading" class="question-type"/>
+<input type="hidden" value="{{ node.nid.value }}" class="get-qid"/>

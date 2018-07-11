@@ -1,0 +1,50 @@
+<div class="content">
+  <h2 class="title">{{ node.title.value }}</h2>
+</div>
+<div class="practice">
+  <a class="btn btn-primary"
+     href="/node/add/question?bid={{ node.nid.value }}&type={{ node.field_section_type.value }}&destination=/question/{{ node.nid.value }}/manage"> {{ 'Add Question'|t }}</a>
+  <a class="btn btn-info" href="/quiz/{{ node.field_quiz.target_id }}/manage">Back to Quiz Manager</a>
+
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'Question Title'|t }}</th>
+      <th>{{ 'Question Count'|t }}</th>
+      <th>{{ 'Answer Count'|t }}</th>
+      <th>{{ 'Explain Count'|t }}</th>
+      <th>{{ 'Front Question Type'|t }}</th>
+      <th>{{ 'Question Type'|t }}</th>
+      <th>{{ 'Manage Questions'|t }}</th>
+      <th colspan=2>{{ 'Actions'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for question in questions %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td><a
+            href="/node/{{ question.nid.value }}/edit?destination=/question/{{ node.nid.value }}/manage">{{ question.field_title_ui.value }}</a>
+        </td>
+
+        <td
+          style="{% if count[question.nid.value]['count_question'] == 0 %} color:red; {% endif %}">{{ count[question.nid.value]['count_question'] }}</td>
+        <td
+          style="{% if count[question.nid.value]['count_answer'] == 0 %} color:red; {% endif %}">{{ count[question.nid.value]['count_answer'] }}</td>
+        <td
+          style="{% if count[question.nid.value]['count_explain'] == 0 %} color:red; {% endif %}">{{ count[question.nid.value]['count_explain'] }}</td>
+        <td>{{ term[question.nid.value] }}</td>
+        <td style="text-transform: uppercase">{{ question.field_question_type.value }}</td>
+        <td><a class="btn btn-success"
+               href="/node/{{ question.nid.value }}/edit?destination=/question/{{ node.nid.value }}/manage">{{ 'Edit'|t }}</a>
+        </td>
+        <td><a class=" btn btn-danger"
+               href="/node/{{ question.nid.value }}/delete?destination=/set/{{ node.nid.value }}/manage">{{ 'Delete'|t }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

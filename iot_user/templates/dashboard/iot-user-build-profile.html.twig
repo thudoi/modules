@@ -1,0 +1,184 @@
+<div id="modal-profile" class="modal-auto modal-profile">
+  <div class="">
+    <i class="ion-android-close close-modal" data-dismiss="modal" aria-label="Close">
+    </i>
+    <h2 class="modal-caption">
+      {{ 'Build Your Profile'|t }}
+    </h2>
+
+    <div id="step1" class="build-profile">
+      <div class="bp-step">
+                        <span class="active">
+                                    1
+                                </span>
+        <div class="line"></div>
+        <span>
+                                   2
+                                </span>
+        <div class="line"></div>
+        <span>
+                                   3
+                                </span>
+      </div>
+      <p class="bo-im text-center">{{ 'I\'m a <span> Student</span>'|t }}</p>
+      <div class="text-center">
+        <div class="pb-choose">
+          <span class="active" data="Student">{{ 'Student'|t }}</span>
+          <span data="Teacher">{{ 'Teacher'|t }}</span>
+        </div>
+
+      </div>
+      <div class="pb-footer">
+
+        <div class="pbf-left">
+          <img alt="" src="/themes/iot/images/logo.svg">
+          <p>{{ 'We will personalize your feed and <br> recommendation based on this info.'| }}
+          </p>
+        </div>
+        <div class="pbf-right">
+          <div class="bp-control">
+            <a href="#step2" class="next">{{ 'Next'|t }} <i class="fa fa-angle-double-right"></i> </a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div id="step2" class="build-profile  hidden">
+      <div class="bp-step">
+        <span class="active"> 1</span>
+        <div class="line active"></div>
+        <span class="active">2</span>
+        <div class="line"></div>
+        <span>3</span>
+      </div>
+      <div class="step2-content">
+        <div class="step2-choose" data="I have an IELTS score">
+          <p>{{ 'I have an IELTS score'|t }}</p>
+
+        </div>
+        <div class="ts2-item-wrap">
+          <div class="st2-item">
+            <p>{{ '1. Previous score'|t }}</p>
+            <select class="previous_score" name="previous_score">
+              <option value="">{{ '--Please choose--'|t }}</option>
+              {% for key,score in fields['field_previous_score'] %}
+                <option value="{{ key }}">{{ score }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="st2-item">
+            <p>{{ '2. Date of Exam taken'|t }}</p>
+            <div class="st2-date">
+              <div class="da-item">
+                <div class="da-wrap">
+                  <em></em>
+                  <input type='text' class='datetimepicker' value="05/12/2017"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="st2-item">
+            <p>{{ '3. Target score'|t }}</p>
+            <select class="target_score" name="target_score">
+              <option value="">{{ '--Please choose--'|t }}</option>
+              {% for key,score in fields['field_target_score'] %}
+                <option value="{{ key }}">{{ score }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="step2-choose" data="I don't have an IELTS score">
+          <p>{{ 'I don\'t have an IELTS score'|t }}</p>
+        </div>
+        <div class="ts2-item-wrap">
+          <div class="st2-item">
+            <span>{{ 'Target score'}|t }}</span>
+            <select class="target_score2" name="target_score2">
+              <option value="">{{ '--Please choose--'|t }}</option>
+              {% for key,score in fields['field_target_score'] %}
+                <option value="{{ key }}">{{ score }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="error-message2"></div>
+      <div class="pb-footer">
+        <div class="pbf-left">
+          <img alt="" src="/themes/iot/images/logo.svg">
+          <p>{{ 'We will personalize your feed and <br> recommendation based on this info.'|t }}
+          </p>
+        </div>
+        <input type="hidden" value="" class="test-score"/>
+        <div class="pbf-right">
+          <div class="bp-control ">
+            <a href="#step1" class="cancel"> <i class="fa fa-angle-double-left"></i>{{ 'Previous'|t }} </a>
+            <a class="step2-action next" href="#step3">{{ 'Next'|t }} <i class="fa fa-angle-double-right"></i> </a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div id="step3" class="build-profile  hidden">
+      <div class="bp-step">
+        <span class="active">1</span>
+        <div class="line active"></div>
+        <span class="active">2</span>
+        <div class="line active"></div>
+        <span class="active">3</span>
+      </div>
+      <div class="step3-content">
+        <br/>
+        <div class="st3-item">
+          <p>{{ '1. My reason for practicing IELTS'|t }}</p>
+          <div class="st3-radio st4-radio">
+            <div class="row practicing">
+              {% for key,value in fields['field_practicing'] %}
+                <div data="{{ value }}" class="str-item">
+                  <em>{{ value }}</em>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="st3-item">
+          <p>{{ '2. From 1 to 5, how would you like to study in these countries?'|t }}</p>
+          <div class="starbox destination">
+            {% for key,value in fields['field_destination'] %}
+              <div class="starbox-item">
+                <a data-rate="1" class="fa fa-star fa-star-o"></a>
+                <a data-rate="2" class="fa fa-star fa-star-o"></a>
+                <a data-rate="3" class="fa fa-star fa-star-o"></a>
+                <a data-rate="4" class="fa fa-star fa-star-o"></a>
+                <a data-rate="5" class="fa fa-star fa-star-o"></a>
+                <span>{{ value }}</span>
+                <input class="star-data" type="hidden" value="" data-key="{{ key }}">
+              </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="error-message3"></div>
+      <div class="pb-footer">
+        <div class="pbf-left">
+          <img alt="" src="/themes/iot/images/logo.svg">
+          <p>{{ 'We will personalize your feed and <br> recommendation based on this info.'|t }}
+          </p>
+        </div>
+        <div class="pbf-right">
+          <div class="bp-control ">
+            <a href="#step2" class="cancel"> <i class="fa fa-angle-double-left"></i>{{ 'Previous'|}t }} </a>
+            <a id="submit-proced" href="#">{{ 'Procced'|t }} </a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+  </div>
+</div>

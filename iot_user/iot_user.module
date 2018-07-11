@@ -1,0 +1,147 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: cadic
+ * Date: 11/14/17
+ * Time: 14:48
+ */
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\node\Entity\Node;
+
+include(drupal_get_path('module', 'iot_user') . '/includes/hook_form_alter.inc');
+
+/**
+ * Implements hook_theme().
+ */
+function iot_user_theme($existing, $type, $theme, $path) {
+  return [
+    'iot_user_edit_profile' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/form/',
+      'template' => 'iot-user-edit-profile',
+    ],
+    'iot_user_profile' => [
+      'variables' => ['user' => NULL,],
+      'path' => $path . '/templates/form/',
+      'template' => 'iot-user-profile',
+    ],
+    'iot_user_form_register' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/form/',
+      'template' => 'iot-user-form-register',
+    ],
+    'iot_user_analytics' => [
+      'variables' => [
+        'user' => NULL,
+        'bandscorechart' => NULL,
+        'accuracy' => NULL,
+        'timespend' => NULL,
+        'perform' => NULL,
+        'listening' => NULL,
+        'reading' => NULL,
+        'analytics' => NULL,
+        'dataChart' => NULL,
+      ],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-user-analytics',
+    ],
+    'iot_user_history' => [
+      'variables' => ['history' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-user-history',
+    ],
+    'iot_band_score_chart' => [
+      'variables' => ['user' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-band-score-chart',
+    ],
+    'iot_accuracy_chart' => [
+      'variables' => ['user' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-accuracy-chart',
+    ],
+    'iot_timespend_chart' => [
+      'variables' => ['user' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-timespend-chart',
+    ],
+    'iot_perform_chart' => [
+      'variables' => ['user' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-perform-chart',
+    ],
+    'iot_listening_chart' => [
+      'variables' => ['user' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-listening-chart',
+    ],
+    'iot_reading_chart' => [
+      'variables' => ['user' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-reading-chart',
+    ],
+    'iot_data_chart' => [
+      'variables' => ['data' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-data-chart',
+    ],
+    'iot_user_login' => [
+      'variables' => [
+        'destination' => NULL,
+        'submit' => NULL,
+      ],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-user-login',
+    ],
+    'iot_user_register' => [
+      'variables' => ['destination' => NULL],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-user-register',
+    ],
+    'iot_user_history_filter' => [
+      'variables' => [
+        'collections' => NULL,
+        'col' => NULL,
+        'st' => NULL,
+      ],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-history-filter',
+    ],
+    'iot_user_build_profile' => [
+      'variables' => [
+        'destination' => NULL,
+        'fields' => NULL,
+        'isProfile' => NULL,
+      ],
+      'path' => $path . '/templates/dashboard/',
+      'template' => 'iot-user-build-profile',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ * Clear All Zero Score.
+ */
+function iot_user_cron() {
+  $tids = \Drupal::entityQuery('node')
+    ->condition('type', 'score')
+    ->condition('status', 1)
+    ->execute();
+  $nodes = \Drupal\node\Entity\Node::loadMultiple($tids);
+  foreach ($nodes as $node) {
+    $score = $node->get('field_score')->value;
+    $score = explode('/', $score);
+    if ($score[0]) {
+      unset($tids[$node->id()]);
+    }
+  }
+
+  $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
+  $entities = $storage_handler->loadMultiple($tids);
+  $storage_handler->delete($entities);
+  $total = count($tids);
+  $message = $total . ' Score has been deleted.';
+  \Drupal::logger('my_module')->notice($message);
+}

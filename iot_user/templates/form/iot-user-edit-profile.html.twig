@@ -1,0 +1,64 @@
+<div class="profile-page">
+  <h2 class="page-caption">
+    {{ 'My profile'|t }}
+  </h2>
+  <form{{ attributes }}>
+    {{ form.form_build_id }}
+    {{ form.form_token }}
+    {{ form.form_id }}
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-sm-12 col-lg-push-6">
+        <div class="profile-field">
+          <span>{{ 'Profile picture:'|t }}</span>
+          {{ form.user_picture }}
+        </div>
+      </div>
+      <div class="col-lg-6  col-md-12 col-sm-12 col-lg-pull-6">
+        <div class="profile-field">
+          <p> {{ form.username }}</p>
+        </div>
+        <div class="profile-field">
+          {{ form.field_first_name }}
+        </div>
+        <div class="profile-field">
+          {{ form.field_last_name }}
+        </div>
+        <div class="profile-field">
+          <p> {{ form.email_address }}</p>
+        </div>
+        <div class="profile-field">
+          <div class="gender">
+            {{ form.field_gender }}
+          </div>
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Date of Birth:'|t }}</span>
+          <div class="da-wrap">
+            <em></em>
+            {{ form.field_dob }}
+          </div>
+        </div>
+        <div class="profile-field">
+          {{ form.field_facebook_id }}
+        </div>
+        <div class="profile-field">
+          {{ form.field_wechat_id }}
+        </div>
+        <h3>{{ 'Password:'|t }}</h3>
+        <div class="profile-field">
+          {{ form.account.current_pass }}
+        </div>
+        <div class="profile-field">
+          {{ form.account.pass }}
+        </div>
+        <div class="subcribe-profle">
+          {{ form.field_subscribe }}
+        </div>
+        <div class="profile-field">
+          {{ form.actions }}
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

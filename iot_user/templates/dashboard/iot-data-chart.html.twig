@@ -1,0 +1,276 @@
+<script src="/libraries/charts/Chart.bundle.js"></script>
+<script src="/libraries/charts/utils.js"></script>
+<script>
+  var color = Chart.helpers.color;
+  var bandscore_config = {
+    labels: [ {% for key,date in data.dataRange %}
+      "{{ date }}",
+      {% endfor %}],
+    datasets: [{
+      label: 'Listening',
+      backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.blue,
+      borderWidth: 1,
+      data: [
+        {% for key,date in data.dataRange %}
+        {% if data.chartLine.scoreR[key] %}
+        {% for score in data.chartLine.scoreR[key] %}
+        {{ score }},
+        {% endfor %}
+        {% else %}
+        ,
+        {% endif %}
+        {% endfor %}
+      ]
+    }, {
+      label: 'Reading',
+      backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.red,
+      borderWidth: 1,
+      data: [
+        {% for key,date in data.dataRange %}
+        {% if data.chartLine.scoreL[key] %}
+        {% for score in data.chartLine.scoreL[key] %}
+        {{ score }},
+        {% endfor %}
+        {% else %}
+        ,
+        {% endif %}
+        {% endfor %}
+      ]
+    }
+    ]
+
+  };
+
+  var accuracy_config = {
+    labels: [ {% for key,date in data.dataRange %}
+      "{{ date }}",
+      {% endfor %}],
+    datasets: [{
+      label: 'Listening',
+      backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.blue,
+      borderWidth: 1,
+      data: [
+        {% for key,date in data.dataRange %}
+        {% if data.chartLine.accL[key] %}
+        {% for score in data.chartLine.accL[key] %}
+        {{ score }},
+        {% endfor %}
+        {% else %}
+        ,
+        {% endif %}
+        {% endfor %}
+      ]
+    }, {
+      label: 'Reading',
+      backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.red,
+      borderWidth: 1,
+      data: [
+        {% for key,date in data.dataRange %}
+        {% if data.chartLine.accR[key] %}
+        {% for score in data.chartLine.accR[key] %}
+        {{ score }},
+        {% endfor %}
+        {% else %}
+        ,
+        {% endif %}
+        {% endfor %}
+      ]
+    }
+    ]
+
+  };
+  var timespend_config = {
+    labels: [ {% for key,date in data.dataRange %}
+      "{{ date }}",
+      {% endfor %}],
+    datasets: [{
+      label: 'Listening',
+      backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.blue,
+      borderWidth: 1,
+      data: [
+        {% for key,date in data.dataRange %}
+        {% if data.chartLine.timeL[key] %}
+        {% for score in data.chartLine.timeL[key] %}
+        {{ score }},
+        {% endfor %}
+        {% else %}
+        ,
+        {% endif %}
+        {% endfor %}
+      ]
+    }, {
+      label: 'Reading',
+      backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.red,
+      borderWidth: 1,
+      data: [
+        {% for key,date in data.dataRange %}
+        {% if data.chartLine.timeR[key] %}
+        {% for score in data.chartLine.timeR[key] %}
+        {{ score }},
+        {% endfor %}
+        {% else %}
+        ,
+        {% endif %}
+        {% endfor %}
+      ]
+    }
+    ]
+
+  };
+
+
+  var Pieconfig = {
+    type: 'pie',
+    data: {
+      datasets: [{
+        data: [
+          {{ data.pei.total_correct }},
+          {{ data.pei.total_incorrect }},
+          {{ data.pei.total_unanswer }},
+        ],
+        backgroundColor: [
+          window.chartColors.red,
+          window.chartColors.yellow,
+          window.chartColors.blue,
+        ],
+        label: 'Pie Performance'
+      }],
+      labels: [
+        "Correct",
+        "Incorrect",
+        "Unanswered"
+      ]
+    },
+    options: {
+      responsive: true
+    }
+  };
+
+
+  var barChartDataListening = {
+    labels: [{% for label in data.listening.perform %} "{{ label.shortname }}", {% endfor %}],
+    datasets: [{
+      label: '',
+      backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.blue,
+      borderWidth: 1,
+      data: [
+        {% for percent in data.listening.perform %}
+        {{ percent.accuracy }},
+        {% endfor %}
+      ]
+    }]
+
+  };
+  var barChartDataReading = {
+    labels: [{% for label in data.reading.perform %} "{{ label.shortname }}", {% endfor %}],
+    datasets: [{
+      label: '',
+      backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+      borderColor: window.chartColors.red,
+      borderWidth: 1,
+      data: [
+        {% for percent in data.reading.perform %}
+        {{ percent.accuracy }},
+        {% endfor %}
+      ]
+    }]
+
+  };
+
+  window.onload = function () {
+//    var bandscore = document.getElementById("band_score").getContext("2d");
+//    window.bandscore = new Chart(bandscore, bandscore_config);
+    var bandscore = document.getElementById("band_score").getContext("2d");
+    window.band_score = new Chart(band_score, {
+      type: 'bar',
+      data: bandscore_config,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Band Score'
+        }
+      }
+    });
+
+    var accuracy = document.getElementById("accuracyChart").getContext("2d");
+    window.accuracy = new Chart(accuracy, {
+      type: 'bar',
+      data: accuracy_config,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Accuracy'
+        }
+      }
+    });
+
+    var timespend = document.getElementById("timespend").getContext("2d");
+    window.timespend = new Chart(timespend, {
+      type: 'bar',
+      data: timespend_config,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Time Spend'
+        }
+      }
+    });
+
+    var perform = document.getElementById("pie_perform").getContext("2d");
+    window.perform = new Chart(perform, Pieconfig);
+
+    var listening = document.getElementById("listening_perform").getContext("2d");
+    window.listening = new Chart(listening, {
+      type: 'bar',
+      data: barChartDataListening,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Listening Performance'
+        }
+      }
+    });
+
+    //window.listening = new Chart(listening, barChartDataListening);
+
+    var reading = document.getElementById("reading_perform").getContext("2d");
+    window.reading = new Chart(reading, {
+      type: 'bar',
+      data: barChartDataReading,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Reading Performance'
+        }
+      }
+    });
+    //window.reading = new Chart(reading, barChartDataReading);
+  };
+</script>

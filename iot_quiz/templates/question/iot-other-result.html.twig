@@ -1,0 +1,81 @@
+{% if nodes %}
+  <div class="other-module">
+    <div class="box-caption box-caption-margin">
+      <p>{{ 'Other modules in this test:'|t }} </p>
+    </div>
+    <div class="row row-fix">
+      {% for node in nodes %}
+        {% if node.field_quiz_type.value=='listening' %}
+          <div class="col-md-4 col-sm-4 col-xs-12 col-fix">
+            <div class="om-item cyan">
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}">
+                                            <span class="om-icon">
+                                            </span>
+                <strong>{{ node.field_quiz_type.value }}</strong>
+              </a>
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}" class="om-btn">
+                <span></span>
+                {{ 'Take Test'|t }}
+              </a>
+              <a href="{{ path('quiz.solution', {'node': node.nid.value}) }}" class="om-btn cyan-dark">
+                <span></span>
+                {{ 'View solution'|t }}
+              </a>
+            </div>
+          </div>
+        {% endif %}
+        {% if node.field_quiz_type.value=='reading' %}
+          <div class="col-md-4 col-sm-4 col-xs-12 col-fix">
+            <div class="om-item">
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}">
+                                            <span class="om-icon">
+                                            </span>
+                <strong>{{ node.field_quiz_type.value }}</strong>
+              </a>
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}" class="om-btn">
+                <span></span>
+                {{ 'Take Test'|t }}
+              </a>
+              <a href="{{ path('quiz.solution', {'node': node.nid.value}) }}" class="om-btn green-dark">
+                <span></span>
+                {{ 'View solution'|t }}
+              </a>
+            </div>
+          </div>
+        {% endif %}
+        {% if node.field_quiz_type.value=='writing' %}
+          <div class="col-md-4 col-sm-4 col-xs-12 col-fix">
+            <div class="om-item orange">
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}">
+                                            <span class="om-icon">
+                                            </span>
+                <strong>{{ node.field_quiz_type.value }}</strong>
+              </a>
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}" class="om-btn">
+                <span></span>
+                {{ 'Take Test'|t }}
+              </a>
+            </div>
+          </div>
+        {% endif %}
+        {% if node.field_quiz_type.value=='speaking' %}
+          <div class="col-md-4 col-sm-4 col-xs-12 col-fix">
+            <div class="om-item pink">
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}">
+                                            <span class="om-icon">
+                                            </span>
+                <strong>{{ node.field_quiz_type.value }}</strong>
+              </a>
+              <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}" class="om-btn">
+                <span></span>
+                {{ 'Take Test'|t }}
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="col-md-6 col-sm-12">
+    </div>
+  </div>
+{% endif %}

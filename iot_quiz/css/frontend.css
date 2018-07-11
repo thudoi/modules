@@ -1,0 +1,100 @@
+
+.error .error {
+  display: block;
+}
+
+.error .play-pause p {
+  cursor: auto;
+}
+
+.error .error-message {
+  display: block;
+}
+
+.nodepad textarea {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex p {
+  margin: 5px 0px 0px 0px !important;
+}
+
+.flex .number {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+}
+
+.sl-item li {
+  list-style: none;
+}
+
+.question-panel .qp-item {
+  cursor: pointer;
+}
+
+.reading-header .rh-top .brand-reading {
+  width: 160px !important;
+}
+
+.split-left.cyan .sl-item .number {
+  background-color: #32b3c7;
+}
+
+.split-left .sl-item .number {
+  background-color: #327846;
+}
+
+.test-hero .test-hero-icon {
+  width: 160px !important;
+}
+
+.rc-item {
+  display: flex;
+}
+
+.rc-item span {
+  margin-right: 10px;
+}
+
+.table {
+  margin-bottom: 0 !important;
+}
+
+.drop_down .table tbody tr td {
+  padding: 5px 0px 5px 20px !important;
+}
+
+.drop_down .table tbody tr td:first-child {
+  font-weight: bold;
+}
+
+.list-answer .qp-item.qp-item-large span {
+  font-size: 10px;
+  line-height: 13px;
+  padding-top: 2px;
+}
+
+.list-answer .qp-item.qp-item-large em {
+  display: block;
+  width: 80%;
+  margin: 0px auto;
+  height: 1px;
+  background: none;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.list-question {
+  padding-left: 15px !important;
+}

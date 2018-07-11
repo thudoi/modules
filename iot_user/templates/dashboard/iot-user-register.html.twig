@@ -1,0 +1,86 @@
+<div class="modal-auto modal-profile">
+  <div class="">
+    <i class="ion-android-close close-modal" data-dismiss="modal" aria-label="Close">
+    </i>
+
+    <h2 class="modal-caption">
+      {{ 'Sign up new account'|t }}
+    </h2>
+
+    <div class="login-box account">
+      <div class="error-message main"></div>
+      <div class="login-left">
+        <form method="post" id="user-register">
+          <div class="login-feild">
+            <p>{{ 'Username'|t }}</p>
+            <div class="text-feild">
+              <i class="fa fa-user"></i>
+              <input type="text" required class="username" name="username"/>
+              <div class="error-message username"></div>
+            </div>
+          </div>
+          <div class="login-feild">
+            <p>{{ 'Email'|t }}</p>
+            <div class="text-feild">
+              <i class="fa fa-envelope"></i>
+              <input type="email" required class="email" name="email"/>
+              <div class="error-message email"></div>
+            </div>
+          </div>
+          <div class="login-feild">
+            <p>{{ 'Password'|t }}</p>
+            <div class="text-feild">
+              <i class="fa fa-lock"></i>
+              <input type="password" class="password" name="password"/>
+              <div class="error-message password"></div>
+            </div>
+          </div>
+          <div class="login-feild">
+            <p>{{ 'Confirm password'|t }}</p>
+            <div class="text-feild">
+              <i class="fa fa-lock"></i>
+              <input type="password" class="confirm_password" name="confirm_password"/>
+              <div class="error-message confirm_password"></div>
+            </div>
+          </div>
+          <button type="submit" class="btn-login">
+            {{ 'Register'|t }}
+          </button>
+          <input type="hidden" value="{{ destination }}" class="destination"/>
+          <div class="create-acc-link">
+            <p>{{ 'Have a account already'|t }}. <a class="use-ajax" data-dialog-type="modal"
+                                                    href="/account/login?destination={{ destination }}">{{ 'Please login here'|t }}</a>
+            </p>
+          </div>
+        </form>
+      </div>
+      <div class="login-line">
+        <span>{{ 'Or'|t }}</span>
+      </div>
+      <div class="login-right">
+        <a href="/user/login/google?destination={{ destination }}">
+          <i class="fa fa-google"></i>{{ 'Sign up with Google'|t }}
+        </a>
+        <a href="/user/login/facebook?destination={{ destination }}" class="facebook">
+          <i class="fa fa-facebook-f"></i>{{ 'Sign up with Facebook'|t }}
+        </a>
+        <a href="/user/login/twitter?destination={{ destination }}" class="twitter">
+          <i class="fa fa-twitter"></i>{{ 'Sign up with Twitter'|t }}
+        </a>
+        {#<a href="/user/login/weibo" class="weibo">#}
+        {#<i class="fa fa-weibo"></i>Sign up with Weibo#}
+        {#</a>#}
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <br/>
+    <br/>
+    <div class="create-acc-link">
+      <p>
+        {{ 'By joining IELTS Online Tests, you agree to our
+                <a href="/terms-and-conditions">Terms of Use</a> and <a href="/privacy-policy">Privacy Policy.</a>'|t }}
+    </div>
+  </div>
+</div>
+
+

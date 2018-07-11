@@ -1,0 +1,109 @@
+{% if features %}
+  <div class="feature-releases">
+    <div class="box-caption box-caption-margin">
+      <p>{{ 'Featured IELTS Releases:'|t }} </p>
+    </div>
+    <div class="book-item-wrap">
+      <div class="row row-fix">
+        {% for feature in features %}
+          <div class="col-md-3 col-sm-6 col-xs-12 col-fix">
+            <div class="book-item">
+              <a href="{{ path('entity.node.canonical', {'node': feature.collection.nid.value}) }}">
+                <img alt=""
+                     src="{{ file_url(feature.collection.field_collection_thumbnail.entity.uri.value | image_style('latest_collection')) }} ">
+              </a>
+              <h3>
+                <a
+                  href="{{ path('entity.node.canonical', {'node': feature.collection.nid.value}) }}">{{ feature.collection.title.value }}</a>
+              </h3>
+              <div class="test-vote small">
+                {{ feature.star_rate }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+<div class="box">
+  <div class="box-caption box-caption-margin">
+    <p>{{ 'Available Practice Tests:'|t }} </p>
+  </div>
+  <div class="tab-test">
+    <ul role="tablist">
+      <li class="active">
+        <a href="#tab1" role="tab" data-toggle="tab">
+          <span class="icon-alltest"></span>
+          {{ 'All Tests'|t }}
+        </a>
+      </li>
+      {% if terms %}
+        {% for cat in terms %}
+          <li>
+            <a id="tab-click-{{ cat.tid.value }}" href="#tab{{ cat.tid.value }}" role="tab" data-toggle="tab">
+              <span class="icon-academic"></span>
+              {{ cat.name.value }}
+            </a>
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="tab1">
+        <div class="book-item-wrap">
+          <div class="row row-fix">
+            {% for collection in collections %}
+              <div class="col-md-3 col-sm-6 col-xs-12 col-fix">
+                <div class="book-item">
+                  <a href="{{ path('entity.node.canonical', {'node': collection.collection.nid.value}) }}">
+                    <img alt=""
+                         src="{{ file_url(collection.collection.field_collection_thumbnail.entity.uri.value | image_style('latest_collection')) }} ">
+                  </a>
+                  <h3>
+                    <a
+                      href="{{ path('entity.node.canonical', {'node': collection.collection.nid.value}) }}">{{ collection.collection.title.value }}</a>
+                  </h3>
+                  <div class="test-vote small">
+                    {{ collection.star_rate }}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% if terms %}
+        {% for cate in terms %}
+          <div role="tabpanel" class="tab-pane " id="tab{{ cate.tid.value }}">
+            <div class="book-item-wrap">
+              <div class="row row-fix">
+                {% for col in category[cate.tid.value] %}
+                  <div class="col-md-3 col-sm-6 col-xs-12 col-fix">
+                    <div class="book-item">
+                      <a href="{{ path('entity.node.canonical', {'node': col.collection.nid.value}) }}">
+                        <img alt=""
+                             src="{{ file_url(col.collection.field_collection_thumbnail.entity.uri.value | image_style('latest_collection')) }}">
+                      </a>
+                      <h3>
+                        <a
+                          href="{{ path('entity.node.canonical', {'node': col.collection.nid.value}) }}">{{ col.collection.title.value }}</a>
+                      </h3>
+                      <div class="test-vote small">
+                        {{ col.star_rate }}
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+</div>

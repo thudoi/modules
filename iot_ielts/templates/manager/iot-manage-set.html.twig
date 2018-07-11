@@ -1,0 +1,71 @@
+<div class="content">
+  <h2 class="title">{{ node.title.value }}</h2>
+</div>
+<div class="practice">
+
+  <a class=" btn btn-primary"
+     href="/node/add/quiz?sid={{ node.nid.value }}&type={{ type }}&destination=/set/{{ node.nid.value }}/manage"> {{ 'Add Quiz'|t }}</a>
+  <a class="btn btn-info"
+     href="/collection/{{ node.field_collection.target_id }}/manage">{{ 'Back to Collection Manager'|t }}</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'Quiz Title'|t }}</th>
+      <th>{{ 'Show Explain'|t }}</th>
+      <th>{{ 'Question Type'|t }}</th>
+      <th>{{ 'Manage Questions'|t }}</th>
+      <th colspan=2>{{ 'Review Quiz'|t }}</th>
+      <th colspan=2>{{ 'Actions'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sec in secs %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        {% if (sec.field_quiz_type.value=='listening') or (sec.field_quiz_type.value=='reading') %}
+          <td><a href="/quiz/{{ sec.nid.value }}/manage">{{ sec.field_title_ui.value }}</a></td>
+          <td>
+            {% if sec.field_show_explanation.value==1 %}
+              {{ 'YES'|t }}
+            {% else %}
+              {{ 'NO'|t }}
+            {% endif %}
+          </td>
+          <td style="text-transform: uppercase;">{{ sec.field_quiz_type.value }}</td>
+          <td><a class="btn btn-primary"
+                 href="/quiz/{{ sec.nid.value }}/manage">{{ 'Manage Section'|t }}</a></td>
+          <td><a class=" btn btn-info" target="_blank"
+                 href="/iot-test/{{ sec.nid.value }}/">{{ 'Preview'|t }}</a>
+          </td>
+          <td><a class=" btn btn-success"
+                 href="/node/{{ sec.nid.value }}/edit?destination=/set/{{ node.nid.value }}/manage">{{ 'Edit'|t }}</a>
+          </td>
+          <td><a class=" btn btn-danger"
+                 href="/node/{{ sec.nid.value }}/delete?destination=/set/{{ node.nid.value }}/manage">{{ 'Delete'|t }}</a>
+          </td>
+        {% else %}
+          <td>{{ sec.field_title_ui.value }}</td>
+          <td>
+            {% if sec.field_show_explanation.value==1 %}
+              {{ 'YES'|t }}
+            {% else %}
+              {{ 'NO'|t }}
+            {% endif %}
+          </td>
+          <td style="text-transform: uppercase;">{{ sec.field_quiz_type.value }}</td>
+          <td><a class=" btn btn-info" target="_blank"
+                 href="/iot-test/{{ sec.nid.value }}/">{{ 'Preview'|t }}</a>
+
+          <td><a class=" btn btn-success"
+                 href="/node/{{ sec.nid.value }}/edit?destination=/set/{{ node.nid.value }}/manage">{{ 'Edit'|t }}</a>
+          </td>
+          <td><a class="btn btn-danger"
+                 href="/node/{{ sec.nid.value }}/delete?destination=/set/{{ node.nid.value }}/manage">{{ 'Delete'|t }}</a>
+          </td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

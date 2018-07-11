@@ -1,0 +1,40 @@
+<div class="content">
+  <h2 class="title">{{ node.title.value }}</h2>
+</div>
+<div class="practice">
+  <a class="btn btn-primary"
+     href="/node/add/set?cid={{ node.nid.value }}&destination=/collection/{{ node.nid.value }}/manage"> {{ 'Add Set'|t }}</a>
+  <a class="btn btn-info" href="/manage/collections"> {{ 'Back to My Collection'|t }}</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'Set Title'|t }}</th>
+      <th colspan=2>{{ 'Action'|t }}</th>
+      <th>{{ 'Manage Quiz'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for set in sets %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td><a href="/set/{{ set.nid.value }}/manage">{{ set.title.value }}</a></td>
+        <td><a class="btn btn-success"
+               href="/node/{{ set.nid.value }}/edit?destination=/collection/{{ node.nid.value }}/manage">{{ 'edit'|t }}</a>
+        </td>
+        <td><a class="btn btn-primary"
+               href="/node/{{ set.nid.value }}/delete?destination=/collection/{{ node.nid.value }}/manage">{{ 'delete'|t }}</a>
+        </td>
+        <td>
+          <div class="exam-list">
+            <div class="container-fluid">
+              <a href="/set/{{ set.nid.value }}/manage" class="btn btn-primary exam-buttons"><span
+                  class="glyphicon glyphicons-question-sign"></span> {{ 'Manage Quiz'|t }}</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

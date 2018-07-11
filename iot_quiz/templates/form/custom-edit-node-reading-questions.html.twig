@@ -1,0 +1,27 @@
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+<div class="reading-wrapper">
+  <div class="reading-content">
+    {% if form.title %}
+      {{ form.title }}
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#field_explanation">{{ 'Explanation'|t }}</a></li>
+        <li><a data-toggle="tab" href="#body">{{ 'Reading Text'|t }}</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="field_explanation" class="tab-pane fade in active">
+          {{ form.field_explanation }}
+        </div>
+        <div id="body" class="tab-pane fade ">
+          {{ form.body }}
+        </div>
+      </div>
+    {% endif %}
+    {{ form.field_reading_questions }}
+  </div>
+  {{ form.footer }}
+  <div class="action">
+    {{ form.actions }}
+  </div>
+</div>

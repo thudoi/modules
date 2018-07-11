@@ -1,0 +1,230 @@
+.explain {
+  background-color: #f9a95a;
+  border-radius: 2px;
+  padding: 0px;
+}
+
+.explain:before {
+  font-style: normal;
+  font-weight: 700;
+  padding: 0px 5px;
+  background-color: #f78f29;
+}
+
+.explainqe:before {
+  content: "Example";
+}
+
+.explainq1:before {
+  content: "Q1";
+}
+
+.explainq2:before {
+  content: "Q2";
+}
+
+.explainq3:before {
+  content: "Q3";
+}
+
+.explainq4:before {
+  content: "Q4";
+}
+
+.explainq5:before {
+  content: "Q5";
+}
+
+.explainq6:before {
+  content: "Q6";
+}
+
+.explainq7:before {
+  content: "Q7";
+}
+
+.explainq8:before {
+  content: "Q8";
+}
+
+.explainq9:before {
+  content: "Q9";
+}
+
+.explainq10:before {
+  content: "Q10";
+}
+
+.explainq11:before {
+  content: "Q11";
+}
+
+.explainq12:before {
+  content: "Q12";
+}
+
+.explainq13:before {
+  content: "Q13";
+}
+
+.explainq14:before {
+  content: "Q14";
+}
+
+.explainq15:before {
+  content: "Q15";
+}
+
+.explainq16:before {
+  content: "Q16";
+}
+
+.explainq17:before {
+  content: "Q17";
+}
+
+.explainq18:before {
+  content: "Q18";
+}
+
+.explainq19:before {
+  content: "Q19";
+}
+
+.explainq20:before {
+  content: "Q20";
+}
+
+.explainq21:before {
+  content: "Q21";
+}
+
+.explainq22:before {
+  content: "Q22";
+}
+
+.explainq23:before {
+  content: "Q23";
+}
+
+.explainq24:before {
+  content: "Q24";
+}
+
+.explainq25:before {
+  content: "Q25";
+}
+
+.explainq26:before {
+  content: "Q26";
+}
+
+.explainq27:before {
+  content: "Q27";
+}
+
+.explainq28:before {
+  content: "Q28";
+}
+
+.explainq29:before {
+  content: "Q29";
+}
+
+.explainq30:before {
+  content: "Q30";
+}
+
+.explainq31:before {
+  content: "Q31";
+}
+
+.explainq32:before {
+  content: "Q32";
+}
+
+.explainq33:before {
+  content: "Q33";
+}
+
+.explainq34:before {
+  content: "Q34";
+}
+
+.explainq35:before {
+  content: "Q35";
+}
+
+.explainq36:before {
+  content: "Q36";
+}
+
+.explainq37:before {
+  content: "Q37";
+}
+
+.explainq38:before {
+  content: "Q38";
+}
+
+.explainq39:before {
+  content: "Q39";
+}
+
+.explainq40:before {
+  content: "Q40";
+}
+
+.explainq41:before {
+  content: "Q41";
+}
+
+.explainq42:before {
+  content: "Q42";
+}
+
+.explainq43:before {
+  content: "Q43";
+}
+
+.explainq44:before {
+  content: "Q44";
+}
+
+.explainq45:before {
+  content: "Q45";
+}
+
+.explainq46:before {
+  content: "Q46";
+}
+
+.explainq47:before {
+  content: "Q47";
+}
+
+.explainq48:before {
+  content: "Q48";
+}
+
+.explainq49:before {
+  content: "Q49";
+}
+
+.explainq50:before {
+  content: "Q50";
+}
+
+/*.split-left .sl-item.explaination .sl-control {*/
+/*margin: 5px 0px 0px 10px;*/
+/*position: absolute;*/
+/*right: 13px;*/
+/*margin-top: -34px;*/
+/*}*/
+/*.split-left .sl-item.explaination {*/
+/*margin: 13px 0px 0px 0px;*/
+/*}*/
+h1.page-header {
+  display: none;
+}
+

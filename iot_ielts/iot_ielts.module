@@ -1,0 +1,525 @@
+<?php
+
+/**
+ * @file
+ * Contains iot_ielts.module.
+ */
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+include(drupal_get_path('module', 'iot_ielts') . '/includes/iot_ielts_form_alter.inc');
+
+/**
+ * Implements hook_help().
+ */
+function iot_ielts_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the iot_ielts module.
+    case 'help.page.iot_ielts':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This is custom module for IELTS hook') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function iot_ielts_theme($existing, $type, $theme, $path) {
+  return [
+    'iot_ielts' => ['render element' => 'children',],
+    'iot_manage_set' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'type' => NULL,
+      ],
+      'path' => $path . '/templates/manager/',
+      'template' => 'iot-manage-set',
+    ],
+    'iot_manage_question' => [
+      'variables' => [
+        'node' => NULL,
+        'questions' => NULL,
+        'type' => NULL,
+        'term' => NULL,
+        'count' => NULL,
+      ],
+      'path' => $path . '/templates/manager/',
+      'template' => 'iot-manage-question',
+    ],
+    'iot_manage_quiz' => [
+      'variables' => [
+        'node' => NULL,
+        'questions' => NULL,
+        'type' => NULL,
+      ],
+      'path' => $path . '/templates/manager/',
+      'template' => 'iot-manage-quiz',
+    ],
+    'iot_manage_collections' => [
+      'variables' => [
+        'node' => NULL,
+        'sets' => NULL,
+      ],
+      'path' => $path . '/templates/manager/',
+      'template' => 'iot-manage-collection',
+    ],
+    'iot_manage_explain' => [
+      'variables' => ['form' => NULL, 'sets' => NULL],
+      'path' => $path . '/templates/manager/',
+      'template' => 'iot-manage-explain',
+    ],
+    'iot_our_tests' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-our-tests',
+    ],
+    'iot_facts' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-facts',
+    ],
+    'iot_support' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-support',
+    ],
+    'iot_slide' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-slide',
+    ],
+    'iot_testimonial' => [
+      'variables' => ['nodes' => NULL, 'times' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-testimonial',
+    ],
+    'iot_latest_collection' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-latest-collection',
+    ],
+    'iot_tips' => [
+      'variables' => [
+        'node' => NULL,
+        'rate' => NULL,
+        'views' => NULL,
+        'term' => NULL,
+        'desc' => NULL,
+        'term_uri' => NULL,
+      ],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-tips',
+    ],
+    'iot_contact_home' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-contact-home',
+    ],
+    'iot_contact_message' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-contact-message',
+    ],
+    'iot_contact_page' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-contact-page',
+    ],
+    'iot_footer_bar' => [
+      'variables' => ['nodes' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-footer-bar',
+    ],
+    'iot_header_question' => [
+      'variables' => [
+        'node' => NULL,
+        'collection' => NULL,
+        'collection_date' => NULL,
+        'views' => NULL,
+        'take_test' => NULL,
+        'star_rate' => NULL,
+      ],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-header-question',
+    ],
+    'iot_tips_featured' => [
+      'variables' => [
+        'node' => NULL,
+        'rate' => NULL,
+        'views' => NULL,
+        'term' => NULL,
+        'term_uri' => NULL,
+        'desc' => NULL,
+      ],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-tips-featured',
+    ],
+    'iot_tips_featured_related' => [
+      'variables' => [
+        'nodes' => NULL,
+        'rate' => NULL,
+        'views' => NULL,
+        'term' => NULL,
+        'desc' => NULL,
+      ],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-tips-featured-related',
+    ],
+    'iot_tips_related' => [
+      'variables' => [
+        'nodes' => NULL,
+        'rate' => NULL,
+        'views' => NULL,
+        'term' => NULL,
+        'desc' => NULL,
+      ],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-tips-related',
+    ],
+    'iot_menu_mobile' => [
+      'variables' => ['menus' => NULL, 'user' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-menu-mobile',
+    ],
+    'iot_search_tips' => [
+      'variables' => ['get' => NULL],
+      'path' => $path . '/templates/block/',
+      'template' => 'iot-search-tips',
+    ],
+    'iot_report_mistake' => [
+      'variables' => [
+        'node' => NULL,
+        'collection' => NULL,
+        'name' => NULL,
+        'user' => NULL,
+        'url' => NULL,
+        'number' => NULL,
+        'qid' => NULL,
+      ],
+      'path' => $path . '/templates/report/',
+      'template' => 'iot-report-mistake',
+    ],
+    'iot_report_view' => [
+      'variables' => [
+        'node' => NULL,
+        'quiz' => NULL,
+        'collection' => NULL,
+        'name' => NULL,
+        'user' => NULL,
+        'url' => NULL,
+        'number' => NULL,
+        'email' => NULL,
+      ],
+      'path' => $path . '/templates/report/',
+      'template' => 'iot-report-view',
+    ],
+
+
+  ];
+}
+
+/**
+ * @param Drupal $Implement hook_node_presave
+ */
+function iot_ielts_node_presave(Drupal\Core\Entity\EntityInterface $node) {
+  switch ($node->bundle()) {
+    case 'set':
+      if (isset($_GET['cid'])) {
+        $title = $node->get('field_title_ui')->getValue();
+        $collection = Node::load($_GET['cid']);
+        $node->set('field_collection', $_GET['cid']);
+        $node->set('title', $title[0]['value'] . '_' . $collection->getTitle());
+        $response = new RedirectResponse('/collection/' . $_GET['cid'] . '/manage');
+        $response->send();
+      }
+      break;
+    case 'quiz':
+      if (isset($_GET['sid'])) {
+        $title = $node->get('field_title_ui')->getValue();
+        $set = Node::load($_GET['sid']);
+        $node->set('field_set', $_GET['sid']);
+        $node->set('title', $title[0]['value'] . '_' . $set->getTitle());
+        $response = new RedirectResponse('/set/' . $_GET['sid'] . '/manage');
+        $response->send();
+      }
+      else {
+        $title = $node->get('field_title_ui')->value;
+        $set = Node::load($node->get('field_set')->target_id);
+        $coll = Node::load($set->get('field_collection')->target_id);
+        if ($coll) {
+          $node->set('title', $coll->get('title')->value . '_' . $title);
+        }
+      }
+      break;
+    case 'section':
+      if (isset($_GET['sid'])) {
+        $title = $node->get('field_title_ui')->getValue();
+        $set = Node::load($_GET['sid']);
+        $node->set('field_quiz', $_GET['sid']);
+        $node->set('title', $title[0]['value'] . '_' . $set->getTitle());
+        $response = new RedirectResponse('/quiz/' . $_GET['sid'] . '/manage');
+        $response->send();
+      }
+      break;
+    case 'question':
+      if (isset($_GET['bid']) && $_GET['type']) {
+        $title = $node->get('field_title_ui')->getValue();
+        $set = Node::load($_GET['bid']);
+        $node->set('field_section', $_GET['bid']);
+        $node->set('title', $title[0]['value'] . '_' . $set->getTitle());
+        $response = new RedirectResponse('/question/' . $_GET['bid'] . '/manage');
+        $response->send();
+      }
+      break;
+    case 'score':
+      if ($node->get('status')->value == 1) {
+        $quiz = Node::load($node->get('field_score_quiz')->target_id);
+        $set = Node::load($quiz->get('field_set')->target_id);
+        $collection = Node::load($set->get('field_collection')->target_id);
+        if ($collection) {
+          $count = $collection->get('field_collection_count') ? $collection->get('field_collection_count')->value : 0;
+          $collection->set('field_collection_count', $count + 1);
+          $collection->save();
+        }
+      }
+      break;
+
+  }
+
+}
+
+/**
+ * @param $body
+ * @param int $length
+ *
+ * @return bool|string
+ */
+function shortContent($body, $length = 150) {
+  if (!empty($body)) {
+    $body = strip_tags($body);
+    $content = html_entity_decode($body);
+    if ($len = strlen($content) <= $length) {
+      $return = $content;
+    }
+    else {
+      $pos = strpos($content, ' ', $length - 10);
+      $body = substr($content, 0, $pos);
+      $return = substr($body, 0, $pos) . '...';
+      $return = str_replace(['<br>', '&nbsp;'], '', $return);
+    }
+    return $return;
+  }
+  else {
+    return '';
+  }
+
+}
+
+/**
+ * @param $node
+ *
+ * @return int
+ */
+function counterNode($node) {
+  $connection = \Drupal::database();
+  $query = $connection->select('node_counter');
+  $query->condition('nid', $node->id());
+  $query->addExpression('sum(totalcount)', 'total');
+  $result = $query->execute()->fetchObject();
+  $views = $result->total > 0 ? $result->total : 0;
+  return $views;
+}
+
+/**
+ * Implement get counter quiz by collection
+ */
+function CollectionConter($collection) {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'set')
+    ->condition('field_collection', $collection->id())
+    ->condition('status', 1)
+    ->execute();
+  $nodes = Node::loadMultiple($nids);
+  $total = 0;
+  foreach ($nodes as $node) {
+    $quizIds = \Drupal::entityQuery('node')
+      ->condition('type', 'quiz')
+      ->condition('field_set', $node->id())
+      ->condition('status', 1)
+      ->execute();
+    $quizs = Node::loadMultiple($quizIds);
+    foreach ($quizs as $quiz) {
+      $total += counterNode($quiz);
+    }
+  }
+  return $total;
+}
+
+
+/**
+ *
+ * @return int
+ */
+function counterTips() {
+  return rand(10, 30000);
+}
+
+function clearHtml($text, $tags = '', $invert = FALSE) {
+  preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags);
+  $tags = array_unique($tags[1]);
+
+  if (is_array($tags) AND count($tags) > 0) {
+    if ($invert == FALSE) {
+      return preg_replace('@<(?!(?:' . implode('|', $tags) . ')\b)(\w+)\b.*?>.*?</\1>@si', '', $text);
+    }
+    else {
+      return preg_replace('@<(' . implode('|', $tags) . ')\b.*?>.*?</\1>@si', '', $text);
+    }
+  }
+  elseif ($invert == FALSE) {
+    return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $text);
+  }
+  return $text;
+}
+
+/**
+ * Related tips
+ *
+ * @param $node
+ *
+ * @return mixed
+ */
+function getRelateTips($node) {
+  $element = '2';
+  $db = \Drupal::database();
+  $query = $db->select('node_field_data', 'n');
+  $query->fields('n', ['nid']);
+  $query->join('node__field_category', 'c', 'c.entity_id=n.nid ');
+  $query->condition('n.type', 'tips');
+  $query->condition('n.status', 1);
+  $query->condition('c.bundle', 'tips');
+  $query->condition('n.nid', $node->id(), '<>');
+  $query->condition('c.field_category_target_id', $node->get('field_category')->target_id);
+  // Limit the rows to 20 for each page.
+  $pager = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')
+    ->limit(5)
+    ->element($element);
+  $result = $pager->execute();
+  $nodes = [];
+  $views = [];
+  $rate = [];
+  $cate = [];
+  $desc = [];
+  $vote_widget_service = \Drupal::service('rate.entity.vote_widget');
+  foreach ($result as $n) {
+    $node = Node::load($n->nid);
+    $nodes[] = $node;
+    $term = Term::load($node->get('field_category')->target_id);
+    $vote_widget = $vote_widget_service->buildRateVotingWidget($node->id(), $node->getEntityTypeId(), $node->bundle());
+    $rate[$n->nid] = $vote_widget['votingapi_links'];
+    $views[$n->nid] = counterTips();
+    if ($term) {
+      $cate[$n->nid]['term'] = $term->getName();
+      $cate[$n->nid]['term_uri'] = taxonomy_term_uri($term);
+    }
+    $desc[$n->nid] = shortContent($node->get('body')->value, 150);
+
+  }
+
+  $build['tips'] = [
+    '#theme' => 'iot_tips_related',
+    '#nodes' => $nodes,
+    '#views' => $views,
+    '#rate' => $rate,
+    '#term' => $cate,
+    '#desc' => $desc,
+  ];
+  $build['pager'] = [
+    '#type' => 'pager',
+    '#element' => $element,
+    '#quantity' => 5,
+  ];
+  return $build;
+}
+
+
+function iot_ielts_preprocess_comment(&$variables) {
+  $curent_user = \Drupal::currentUser();
+  $comment = $variables['elements']['#comment'];
+  $uid = $comment->get('uid')->target_id;
+  $user = User::load($uid);
+  $name = $user->get('name')->value;
+  if ($user->get('field_first_name')->value && $user->get('field_last_name')->value) {
+    $name = $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value;
+  }
+  $variables['user_name'] = ['#markup' => $name];
+  $date_formatter = \Drupal::service('date.formatter');
+
+  $date = $date_formatter->formatDiff($comment->get('created')->value, [
+    'granularity' => 1,
+    'return_as_object' => TRUE,
+  ]);
+  $variables['current_user'] = $curent_user;
+  $variables['date'] = ['#markup' => $date];
+}
+
+/**
+ * Implement hook_comment_field
+ */
+function iot_ielts_preprocess_field(&$variables) {
+  $curent_user = \Drupal::currentUser();
+  $element = $variables['element'];
+  if ($element['#field_type'] == 'comment') {
+    $variables['current_user'] = $curent_user;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function iot_ielts_cron() {
+  $result = db_query("SELECT nid FROM node WHERE type = 'tips' ORDER BY RAND() LIMIT 1");
+  $nid = '';
+  foreach ($result as $record) {
+    $nid = $record->nid;
+  }
+  \Drupal::state()->set('iot_random_tips', $nid);
+  drupal_set_message('Tip: ' . $nid . '.has been added today!');
+}
+
+function get_browser_name($user_agent) {
+  if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) {
+    return 'Opera';
+  }
+  elseif (strpos($user_agent, 'Edge')) {
+    return 'Edge';
+  }
+  elseif (strpos($user_agent, 'Chrome')) {
+    return 'Chrome';
+  }
+  elseif (strpos($user_agent, 'Safari')) {
+    return 'Safari';
+  }
+  elseif (strpos($user_agent, 'Firefox')) {
+    return 'Firefox';
+  }
+  elseif (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) {
+    return 'Internet Explorer';
+  }
+
+  return 'Other';
+}
+
+
+
+

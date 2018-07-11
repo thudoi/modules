@@ -1,0 +1,32 @@
+{% if nodes %}
+  <div class="box-tag">
+    <div class="box-caption box-caption-margin">
+      <p>
+        {{ 'Related IELTS Tips:' |t }}</p>
+    </div>
+    {% for key,node in nodes %}
+      <div class="news-item">
+        <a href="{{ path('entity.node.canonical',{'node':node.id}) }}">
+          <img alt=""
+               src="{{ file_url(node.field_image.entity.uri.value | image_style('tips_thumb')) }}">
+        </a>
+        <h3><a href="{{ path('entity.node.canonical',{'node':node.id}) }}">{{ node.title.value }}</a>
+        </h3>
+        <div class="test-vote small">
+          {{ rate[node.id] }}
+        </div>
+        <p>{{ desc[node.id] }}</p>
+        {% if term[node.id]['term'] %}
+          <a href="{{ term[node.id]['term_uri'] }}"
+             class="mi-tag"><em></em> {{ term[node.id]['term'] }}
+          </a>
+        {% endif %}
+        <div class="test-des">
+          <p class="hidden-xs"><span class="icon-ts icon-view"></span> {{ views[node.id] }}</p>
+          <p><span class="icon-ts icon-calendar"></span> {% set date = node.createdtime|date('d M Y') %}{{ date }}</p>
+        </div>
+      </div>
+
+    {% endfor %}
+  </div>
+{% endif %}

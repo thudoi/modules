@@ -1,0 +1,165 @@
+<!--reading-box-->
+{{ popup_solution }}
+{{ popup_expired }}
+{{ popup_submit }}
+
+<div class="reading-box api">
+
+  <div id="slpit-one" class="split split-item">
+    <div style="background-color: #84ae90; height: 40px;">
+      <div id="context-menu" class="context-menu" style="position: relative;display: none;width: 180px;">
+        <div title="Highlight Red" class="cm-item cm-pink" data-color="hl-pink">
+        </div>
+        <div title="Highlight Blue" class="cm-item cm-blue" data-color="hl-blue">
+        </div>
+        <div title="Highlight Green" class="cm-item cm-green" data-color="hl-green">
+        </div>
+        <div title="Remove Highlight" class="cm-item cm-delete" data-color="cm-delete">
+        </div>
+      </div>
+    </div>
+    <div class="split-right padding-top-1">
+      {% for sec in secs %}
+        <div id="set-container-{{ loop.index }}"
+             class="tab-section-reading {{ loop.index==1? 'active':'hidden' }}">
+          <div class="passage-description"> {{ sec.section.field_passage_desc.value|raw }}</div>
+          <div class="section-image"><img height="auto"
+                                          src="{{ file_url(sec.section.field_image.0.entity.uri.value) }}"/>
+          </div>
+          <h2 class="subtitle"> {{ sec.section.field_subtitle_section.value|raw }}</h2>
+          <div class="passage-content"> {{ sec.section.field_passage.value|raw }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div id="slpit-two" class="split split-item">
+    <div class="split-left">
+      {% for sec in secs %}
+        <div id="set-question-{{ loop.index }}"
+             class="tab-section-question-reading {{ loop.index==1? 'active':'hidden' }}">
+          {#Question item#}
+          <div class="sl-caption">
+            <span>{{ sec.section.field_title_ui.value }}: {{ sec.section.field_question_range.value }}</span>
+          </div>
+          <div class="sec-content-{{ loop.index }} ">
+            {% for question in sec.questions %}
+              <div class="question question-{{ loop.index }}">
+                <div class="sl-caption">
+                  <div class="collapse nodepad" aria-expanded="true"
+                       id="nodepad{{ loop.parent.loop.index }}{{ loop.index }}">
+                    <textarea placeholder="Your draft goes here..."></textarea>
+                  </div>
+                  <div class="sl-caption-right">
+                    <a class="btn-show-note " data-toggle="collapse"
+                       data-target="#nodepad{{ loop.parent.loop.index }}{{ loop.index }}" href="javascript:void(0)"
+                       aria-expanded="true">
+                      <strong></strong>{{ 'Show Notepad'|t }}
+                    </a>
+                  </div>
+                </div>
+                {{ question.content|raw }}
+              </div>
+            {% endfor %}
+          </div>
+          {#section button#}
+          <div class="sl-caption sl-caption-bottom">
+            <div class="sl-caption-right">
+              {% if loop.index - 1 > 0 %}
+                <a data="{{ loop.index - 1 }}" href="#section-{{ loop.index - 1 }}" class="btn-section actions-section">
+                  {{ 'Previous Section'|t }}
+                </a>
+              {% endif %}
+              {% if loop.index + 1 <= 3 %}
+                <a data="{{ loop.index + 1 }}" href="#section-{{ loop.index + 1 }}" class="btn-section actions-section">
+                  {{ 'Next Section'|t }}
+                </a>
+              {% endif %}
+            </div>
+            <span>{{ sec.section.field_title_ui.value }}</span>
+            <h2>{{ sec.section.field_question_range.value }}</h2>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+<!--reading-footer-->
+<div class="reading-footer">
+  <div class="question-panel">
+    <div class="qp-caption">
+      <span><em></em> {{ 'Question Pallete'|t }}</span>
+    </div>
+    <div class="qp-items">
+      {% for sec in secs %}
+        {% for question in sec.questions %}
+          {% for q in question.question %}
+            <a
+              class="qp-item qp-item-{{ q.q_number }} {{ q.q_number|length>3? 'qp-item-large': '' }} qp-item-unanswered"
+              data-q="q-{{ q.q_number }}" data-section="{{ loop.parent.loop.parent.loop.index }}">
+              {% if(q.q_number|length>3) %}
+                {% set foo = q.q_number|split('-') %}
+                {{ foo.0 }}
+                <em></em>
+                {{ foo.1 }}
+              {% else %}
+                {{ q.q_number }}
+              {% endif %}
+            </a>
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+    <div class="qp-note">
+      <span><em></em>{{ 'Answered'|t }} </span>
+      <span><em class="unanswered"></em>{{ 'Unanswered'|t }} </span>
+    </div>
+  </div>
+  <div class="rf-button-wrap">
+    <div class="controller-button">
+      <a href="#" class="rf-button hidden-lg hidden-md hidden-sm rf-button-pallete">
+        <span class="icon-pallete"></span>
+        {{ 'Question Pallete'|t }}
+      </a>
+      {#<a href="#" class="rf-button hidden-xs">#}
+      {#<span class="icon-ask"></span>#}
+      {#{{ 'Ask Tutor' }}#}
+      {#</a>#}
+      <a href="#" class="rf-button" data-toggle="modal" data-target="#modal-solution">
+        <span class="icon-review"></span>
+        {{ 'Review'|t }}
+      </a>
+      <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}/solution" class="rf-button">
+        <span class="icon-solution"></span>
+        {{ 'Solution'|t }}
+      </a>
+      {% if logged_in %}
+        <a href="#" class="rf-button" data-toggle="modal" data-target="#modal-submit">
+          <span class="icon-submit"></span>
+          {{ 'Submit'|t }}
+        </a>
+      {% else %}
+        <a class="use-ajax rf-button" data-dialog-type="modal"
+           href="/account/login?destination={{ url('<current>') }}&submit=true">
+          <span class="icon-submit"></span>
+          {{ 'Submit'|t }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="rf-time">
+    <div class="icon-time">
+    </div>
+    <input type="hidden" value="{{ node.field_duration.value ? node.field_duration.value : '00:00' }}"
+           class="innertimmer"/>
+    <span id="stopwatch">--:--</span>
+  </div>
+</div>
+<input type="hidden" value="reading" class="question-type"/>
+<input type="hidden" value="{{ node.nid.value }}" class="get-qid"/>
+
+
+{#{% for sec in secs %}#}
+        {#<a class="trigger-section-tab trigger-section-tab-{{ sec.section.nid.value }}" data="{{ sec.section.nid.value }}" href="#set-container-{{ sec.section.nid.value }}">Sec {{ loop.index }}</a>#}
+
+    {#{% endfor %}#}

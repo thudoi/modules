@@ -1,0 +1,45 @@
+<!-- Add you custom twig html here -->
+<!--section-->
+{% if menus %}
+  <nav class="menu-res hidden-lg hidden-md">
+    <div class="menu-res-inner">
+      <ul>
+        {% for menu in menus %}
+          <li {% if menu['belows'] %}class="has-child" {% endif %}>
+            <a class="has-child-link"
+               href="/{{ menu['links']['link'] }}">{{ menu['links']['title'] }}{% if menu['belows'] %}
+                <span></span>{% endif %} </a>
+            {% if menu['belows'] %}
+              <ul class="sub-menu">
+                {% for below in  menu['belows'] %}
+                  <li {% if below['belowChild'] %}class="has-child" {% endif %}>
+                    <a href="/{{ below['belows']['link'] }}">{{ below['belows']['title'] }}{% if below['belowChild'] %}
+                        <span></span>{% endif %} </a>
+                    {% if below['belowChild'] %}
+                      <ul>
+                        {% for child in  below['belowChild'] %}
+                          <li>
+                            <a href="/{{ child['child']['link'] }}">{{ child['child']['title'] }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+
+        {% endfor %}
+        {% if user %}
+          <li class="li-login"><a href="/account/profile">{{ 'Welcome!'|t }} {{ user }} </a></li>
+          <li class="li-login"><a href="/user/logout">{{ 'Logout'|t }} </a></li>
+        {% else %}
+          <li class="li-login"><a href="/account/login?destination=/{{ url('<current>') }}">{{ 'Login'|t }} </ a></li>
+          <li class="li-login"><a href="/account/register?destination=/{{ url('<current>') }}">{{ 'Register'|t }} </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endif %}

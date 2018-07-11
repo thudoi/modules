@@ -1,0 +1,97 @@
+<!-- Add you custom twig html here -->
+<nav class="menu-res hidden-lg hidden-md">
+  <div class="menu-res-inner">
+    <ul>
+      {#<li><a href="#">Ask Tutor </a></li>#}
+
+      <li class="share hidden"><a class="share-test-action-mobile" href="#">{{ 'Share Test'|t }} </a>
+        <div class="mobile ss-share share-test-mobile a2a_kit">
+          <a class="a2a_button_facebook" href="#"><i class="fa fa-facebook"></i></a>
+          <a class="a2a_button_twitter" href="#"><i class="fa fa-twitter"></i></a>
+          <a class="a2a_button_google_plus" href="#"><i class="fa fa-google-plus"></i></a>
+          {#<a href="#"><i class="fa fa-weibo"></i></a>#}
+        </div>
+      </li>
+
+      <li><a class="use-ajax mistake" data-dialog-type="modal"
+             href="/report/{{ node.nid.value }}/mistake">{{ 'Report Mistake'|t }} </a></li>
+      <li><a class="btn-textsize">Text Size</a></li>
+      <li><a class="print-pdf" target="blank" href="{{ url('<current>') }}/print">{{ 'Print'|t }} </a></li>
+      <li><a class="print-pdf" target="blank" href="{{ url('<current>') }}/print">{{ 'Download'|t }} </a></li>
+      <li><a href="#">Instructions </a></li>
+      <li>
+        <a href="{{ path('entity.node.canonical', {'node': collection.nid.value}) }}">
+          {{ 'Exit Test'|t }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--header-->
+<header class="reading-header">
+  <div class="rh-top hidden-sm hidden-xs">
+    <div class="test-hero hidden-sm hidden-xs">
+      <img alt="" src="{{ file_url(collection.field_collection_thumbnail.0.entity.uri.value) }}">
+      <h1 class="test-caption">{{ collection.title.value }}</h1>
+      <div class="test-des">
+        <div class="test-vote">
+          {{ star_rate }}
+        </div>
+        <p><span class="icon-ts icon-view"></span> {{ 'Views:'|t }} {{ views }}</p>
+        <br/>
+        <p><span class="icon-ts icon-taken"></span> {{ 'Tests Taken:'|t }} {{ take_test }}</p>
+        <p><span class="icon-ts icon-calendar"></span> {{ 'Published on:'|t }} {{ collection_date }}</p>
+      </div>
+    </div>
+    <div class="brand-reading brand-{{ node.field_quiz_type.value }}">
+      <div class="om-icon">
+      </div>
+      <p>{{ node.field_title_ui.value }}</p>
+    </div>
+  </div>
+  <div class="rh-menu">
+            <span class="show-test-menu hidden-sm hidden-xs">
+                <em></em>
+              {{ 'Show Test Info'|t }}
+            </span>
+    <nav class="menu-reading hidden-sm hidden-xs">
+      <ul>
+        {#<li><a href="#"><span class="icon-ask"></span>Ask Tutor</a></li>#}
+
+        <li class="share"><a class="share-test-action" href="#"><span class="icon-share"></span>{{ 'Share Test'|t }}</a>
+          <div class="ss-share share-test a2a_kit">
+            <a class="a2a_button_facebook" href="#"><i class="fa fa-facebook"></i></a>
+            <a class="a2a_button_twitter" href="#"><i class="fa fa-twitter"></i></a>
+            <a class="a2a_button_google_plus" href="#"><i class="fa fa-google-plus"></i></a>
+            {#<a href="#"><i class="fa fa-weibo"></i></a>#}
+          </div>
+        </li>
+
+        <li><a class="use-ajax mistake" data-dialog-type="modal" href="/report/{{ node.nid.value }}/mistake"><i
+              class="fa fa-exclamation-triangle"></i>{{ 'Report Mistake'|t }} </a></li>
+        <li><a class="btn-textsize"><span class="icon-text"></span>{{ 'Text Size'|t }}</a></li>
+        <li><a target="blank" class="print-pdf icon-print" href="{{ url('<current>') }}/print"><span
+              class="icon-print"></span>{{ 'Print'|t }}</a></li>
+        <li><a target="blank" class="print-pdf icon-download" href="{{ url('<current>') }}/print"><span
+              class="icon-download"></span>{{ 'Download'|t }}</a></li>
+        <li><a href="#"><span class="icon-instruction"></span>{{ 'Instructions'|t }}</a></li>
+        <li>
+          <a href="{{ path('entity.node.canonical', {'node': collection.nid.value}) }}">
+            <span class="icon-exit"></span>{{ 'Exit Test'|t }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <a href="/" class="logo-brand">
+      <img alt="" src="/themes/iot/images/logo.svg">
+    </a>
+    <div class="nav-icon hidden-lg hidden-md">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>

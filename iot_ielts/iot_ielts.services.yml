@@ -1,0 +1,5 @@
+services:
+ iot_ielts.breadcrumb:
+   class: Drupal\iot_ielts\Breadcrumb\IotIeltsBreadcrumbBuilder
+   tags:
+    - { name: breadcrumb_builder, priority: 100 }

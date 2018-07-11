@@ -1,0 +1,33 @@
+<div class="modal fade in" id="modal-solution" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     style="display: none;">
+  <div class="modal-dialog modal-auto modal-profile">
+    <div class="">
+      <i class="ion-android-close close-modal" data-dismiss="modal" aria-label="Close">
+      </i>
+      <h2 class="modal-caption">
+        {{ 'Review your answers'|t }}
+      </h2>
+      <div class="review-content">
+        <div class="rc-row">
+          {% for sec in secs %}
+            {% for question in sec.questions %}
+              {% for q in question.question %}
+                <div class="rc-col">
+                  <div class="rc-item">
+                    <span>Q{{ q.q_number }}:</span>
+                    <p id="txtq{{ q.q_number }}"></p>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endfor %}
+          {% endfor %}
+          <div class="clearfix">
+          </div>
+        </div>
+        <div class="bp-control text-center">
+          <a data-dismiss="modal" aria-label="Close"> {{ 'Close'|t }}  </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

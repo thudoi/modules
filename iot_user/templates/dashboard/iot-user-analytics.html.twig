@@ -1,0 +1,208 @@
+{{ dataChart }}
+<div class="analytics">
+  <h2 class="page-caption">
+    {{ 'Analytic Dashboard'|t }}
+  </h2>
+  <div class="analytic-box">
+    <div class="analytic-bar">
+      <div class="ab-right">
+        <a data="band-scored" href="#" class="active">{{ 'Band Score'|t }}</a>
+        <a data="accuracy" href="#">{{ 'Accuracy'|t }}</a>
+        <a data="timespend" href="#">{{ 'Time Spent'|t }}</a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="chart-draw">
+      <div class="chart-item band-scored">{{ bandscorechart }}</div>
+      <div class="chart-item accuracy hidden">{{ accuracy }}</div>
+      <div class="chart-item timespend hidden">{{ timespend }}</div>
+    </div>
+    <div class="date-analytics">
+      <form id="analytics-form" action="" method="GET">
+        <div class="da-item">
+          <span>{{ 'From'|t }}</span>
+          <div class="da-wrap">
+            <em></em>
+            <input type='text' name="dateFrom" class='datetimepicker datefrom' value="{{ analytics.dateFrom }}"/>
+          </div>
+        </div>
+        <div class="da-item">
+          <span>{{ 'To'|t }}</span>
+          <div class="da-wrap">
+            <em></em>
+            <input type='text' name="dateTo" class='datetimepicker dateto' value="{{ analytics.dateTo }}"/>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="analytic-score">
+    <div class="as-col">
+      <span>{{ 'Tests Taken:'|t }}</span>
+      <p>
+        <em class="icon-taken">
+        </em> {{ analytics.taken }}
+      </p>
+    </div>
+    <div class="as-col">
+      <span>{{ 'Avarage Score:'|t }}</span>
+      <p>
+        <em class="icon-chart">
+        </em>{{ analytics.avarage_score }}
+      </p>
+    </div>
+    <div class="as-col">
+      <span>{{ 'Avarage Accuracy:'|t }}</span>
+      <p>
+        <em class="icon-target">
+        </em>{{ analytics.avarage_accuracy }}%
+      </p>
+    </div>
+    <div class="as-col">
+      <span>{{ 'Avarage Time Spent:'|t }}</span>
+      <p>
+        <em class="icon-time">
+        </em>{{ analytics.avarage_time }}
+      </p>
+    </div>
+    {#<div class="as-col">#}
+    {#<span>Rank:</span>#}
+    {#<p>#}
+    {#<em class="icon-cup">#}
+    {#</em>999#}
+    {#</p>#}
+    {#</div>#}
+    <div class="clearfix"></div>
+  </div>
+  <div class="target-achi">
+    <div class="box-caption box-caption-margin">
+      <p>{{ 'Your Target and Achievements'|t }} </p>
+    </div>
+    <span>{{ 'Yours IELTS tests scores'|t }}</span>
+    <div class="ta-score">
+      <p>{{ 'Overall IELTS SCORE'|t }}</p>
+      <strong>{{ analytics.max_score }}</strong>
+      <em>{{ 'The goal score is'|t }} {{ user.field_target_score.value }}</em>
+    </div>
+  </div>
+  <div class="box-performance hidden-xs">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <h3>{{ 'Detailed Testing Performance'|t }}</h3>
+        <p>{{ 'Total tests taken:'|t }} <span>{{ analytics.taken }}</span></p>
+        <p>{{ 'Total questions:'|t }} <span>{{ analytics.total_question }}</span></p>
+        <p>{{ 'Correct questions (CQ):'|t }} <span>{{ analytics.total_correct }}</span></p>
+        <p>{{ 'Incorrect questions (IQ):'|t }} <span>{{ analytics.total_incorrect }}</span></p>
+        <p>{{ 'Unanswered questions (UQ):'|t }} <span>{{ analytics.total_unanswer }}</span></p>
+        <p>{{ 'Avarage time per question:'|t }} <span>{{ analytics.time_per_question }}</span></p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        {{ perform }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="item-score">
+        <div class="ic-top">
+          <div class="ic-icon">
+            <a href="#">
+              <span></span>
+              <strong>{{ 'listening'|t }}</strong>
+            </a>
+          </div>
+          <div class="ic-right">
+            <span>{{ analytics.listening.max_score }}</span>
+            <p>{{ 'Your target score is'|t }} {{ user.field_target_score.value }}</p>
+          </div>
+          <span class="btn-show-performance hidden-lg hidden-md">
+                                        </span>
+          <div class="clearfix">
+          </div>
+        </div>
+        <div class="box-performance ">
+          <h3>{{ 'Detailed Listening Performance'|t }}</h3>
+          <p>{{ 'Total tests taken:'|t }} <span>{{ analytics.listening.taken }}</span></p>
+          <p>{{ 'Total questions:'|t }} <span>{{ analytics.listening.total_question }}</span></p>
+          <p>{{ 'Correct questions:'|t }} <span>{{ analytics.listening.total_correct }}</span></p>
+          <p>{{ 'Incorrect questions:'|t }} <span>{{ analytics.listening.total_incorrect }}</span></p>
+          <p>{{ 'Unanswered questions:'|t }} <span>{{ analytics.listening.total_unanswer }}</span></p>
+          <p>{{ 'Avarage time per question:'|t }} <span>{{ analytics.listening.time_per_question }}</span></p>
+          <div class="box-beakdow hidden-xs">
+            <h3>{{ 'Listening Performance Breakdown'|t }}</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>{{ 'Question Type'|t }}</th>
+                <th>{{ 'Correct/ Total'|t }}</th>
+                <th>{{ 'Accuracy'|t }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for perform in analytics.listening.perform %}
+                <tr>
+                  <td>{{ perform.name }}:</td>
+                  <td>{{ perform.total_correct }}/{{ perform.total_question }}</td>
+                  <td>{{ perform.accuracy }}%</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {{ listening }}
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="item-score">
+        <div class="ic-top">
+          <div class="ic-icon reading">
+            <span></span>
+            <strong>{{ 'Reading'|t }}</strong>
+          </div>
+          <div class="ic-right">
+            <span>{{ analytics.reading.max_score }}</span>
+            <p>{{ 'Your target score is'|t }} {{ user.field_target_score.value }}</p>
+          </div>
+          <span class="btn-show-performance hidden-lg hidden-md">
+                                        </span>
+          <div class="clearfix">
+          </div>
+        </div>
+        <div class="box-performance">
+          <h3>{{ 'Detailed Reading Performance'|t }}</h3>
+          <p>{{ 'Total tests taken:'|t }} <span>{{ analytics.reading.taken }}</span></p>
+          <p>{{ 'Total questions:'|t }} <span>{{ analytics.reading.total_question }}</span></p>
+          <p>{{ 'Correct questions:'|t }} <span>{{ analytics.reading.total_correct }}</span></p>
+          <p>{{ 'Incorrect questions:'|t }} <span>{{ analytics.reading.total_incorrect }}</span></p>
+          <p>{{ 'Unanswered questions:'|t }} <span>{{ analytics.reading.total_unanswer }}</span></p>
+          <p>{{ 'Avarage time per question:'|t }} <span>{{ analytics.reading.time_per_question }}</span></p>
+          <div class="box-beakdow hidden-xs">
+            <h3>{{ 'Reading Performance Breakdown'|t }}</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>{{ 'Question Type'|t }}</th>
+                <th>{{ 'Correct/ Total'|t }}</th>
+                <th>{{ 'Accuracy'|t }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for perform in analytics.reading.perform %}
+                <tr>
+                  <td>{{ perform.name }}:</td>
+                  <td>{{ perform.total_correct }}/{{ perform.total_question }}</td>
+                  <td>{{ perform.accuracy }}%</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {{ reading }}
+      </div>
+    </div>
+
+  </div>
+</div>

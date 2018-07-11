@@ -1,0 +1,49 @@
+<div class="box-caption">
+  <p><span class="bc-icon icon-cup"></span> {{ 'Leaderboard:'|t }}</p>
+</div>
+<div class="table">
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'User'|t }}</th>
+      <th>{{ 'Score'|t }}</th>
+      <th>{{ 'Time'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for res in node %}
+      <tr>
+        <td>
+          {% if(loop.index<4) %}
+            <span class="icon-cup icon-cup{{ loop.index }}">
+                </span>
+          {% else %}
+            {{ loop.index }}
+          {% endif %}
+        </td>
+        <td>{{ res.user_name }}</td>
+        <td>{{ res.score }}</td>
+        <td>{{ res.time }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="share-socer share-ranking">
+  <h3>{{ 'Share your ranking:'|t }}</h3>
+  <input type="text" class="txt txt-link leader-board" value="{{ url('<current>') }}"/>
+  <div class="ss-social">
+    <a href="#" class="btn btn-coppy-url leader-board">
+      <span class="icon-copy"></span>
+      {{ 'Copy URL'|t }}
+    </a>
+    <div class="ss-share a2a_kit">
+      <span>&nbsp; </span>
+      <a class="a2a_button_facebook" href="#"><i class="fa fa-facebook"></i></a>
+      <a class="a2a_button_twitter" href="#"><i class="fa fa-twitter"></i></a>
+      <a class="a2a_button_google_plus" href="#"><i class="fa fa-google-plus"></i></a>
+      {#<a href="#"><i class="fa fa-weibo"></i></a>#}
+    </div>
+  </div>
+</div>

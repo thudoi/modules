@@ -1,0 +1,29 @@
+{% if node %}
+  <article class="tip-article">
+    <a href="{{ path('entity.node.canonical',{'node':node.id}) }}">
+      <img alt="" src="{{ file_url(node.field_image.entity.uri.value) }}">
+    </a>
+    <h3>
+      <a href="{{ path('entity.node.canonical',{'node':node.id}) }}">{{ node.title.value }}</a>
+    </h3>
+    <div class="test-vote small">
+      {{ rate }}
+    </div>
+    <div class="ta-meta">
+      {% if term %}
+        <div class="box-tag"><span class="tag-icon"></span>
+          <a href="{{ term_uri }}" class="tag-item tag-item-bg">{{ term.name.value }} </a>
+        </div>
+      {% endif %}
+      <div class="ta-date">
+        {% set date = node.createdtime|date('d M Y') %}{{ date }}
+      </div>
+
+      <div class="clearfix">
+      </div>
+    </div>
+    <div class="ta-content">
+      <p>{{ desc }}</p>
+    </div>
+  </article>
+{% endif %}

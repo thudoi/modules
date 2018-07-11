@@ -1,0 +1,25 @@
+<!-- Add you custom twig html here -->
+<!--section-->
+{% if nodes %}
+  <section class="section">
+    <div class="container">
+      <div class="section-caption">
+        <span>{{ 'What IELTS test takers say about us'|t }}</span>
+      </div>
+      <div class="owl-carousel owl-say">
+        {% for node in nodes %}
+          <div class="item">
+            <div class="say-item">
+              <div class="say-icon">
+                <img alt="" src="{{ file_url(node.field_image.0.entity.uri.value) }}"/>
+              </div>
+              <span>{{ node.title.value }}</span>
+              <em>{{ times[node.nid.value] }}</em>
+              {{ node.body.value|raw }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

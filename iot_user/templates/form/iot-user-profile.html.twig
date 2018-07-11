@@ -1,0 +1,99 @@
+<div class="profile-page">
+  <h2 class="page-caption">
+    My profile
+  </h2>
+  <div class="row">
+    <form action="/account/update/profile" id="user-profile-edit" method="post" enctype="multipart/form-data">
+      <div class="col-lg-6 col-md-12 col-sm-12 col-lg-push-6">
+        <div class="profile-field">
+          <span>{{ 'Profile picture:'|t }}</span>
+          <div class="avatar-profile">
+            {% if user.user.user_picture %}
+              <img alt="" src="{{ file_url(user.user.user_picture.entity.uri.value | image_style('thumbnail')) }}"/>
+            {% endif %}
+            <p class="uploadImage">
+              <input type="file" name="picture" value="" class="picture">
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6  col-md-12 col-sm-12 col-lg-pull-6">
+        <div class="profile-field">
+          <span>{{ 'Username:'|t }}</span>
+          <p>{{ user.user.name.value }}</p>
+        </div>
+        <div class="profile-field">
+          <span>{{ 'First name:'|t }}</span>
+          <input type="text" placeholder="" value="{{ user.user.field_first_name.value }}" name="firstname"
+                 class="profile-text firstname">
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Last name:'|t }}</span>
+          <input type="text" placeholder="" value="{{ user.user.field_last_name.value }}" name="lastname"
+                 class="profile-text lastname">
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Email:'|t }}</span>
+          <p>{{ user.user.mail.value }}</p>
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Gender:'|t }}</span>
+          <div class="gender">
+            <label>
+
+              <input type="radio" value="1"
+                     name="gender" {% if user.user.field_gender.value == 1 %} checked {% endif %}>
+              {{ 'Male'|t }}
+            </label>
+            <label>
+              <input type="radio" value="0"
+                     name="gender" {% if user.user.field_gender.value == 0 %} checked {% endif %}>
+              {{ 'Female'|t }}
+            </label>
+          </div>
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Date of Birth:'|t }}</span>
+          <div class="da-wrap">
+            <em></em>
+            <input type='text' class='datetimepicker dob' name="dob" value="{{ user.dob }}"/>
+          </div>
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Facebook ID:'|t }}</span>
+          <input type="text" placeholder="" name="facebook_id" value="{{ user.user.field_facebook_id.value }}"
+                 class="profile-text facebook_id">
+        </div>
+        <div class="profile-field">
+          <span>{{ 'WeChat ID:'|t }}</span>
+          <input type="text" placeholder="" name="wechat_id" value="{{ user.user.field_wechat_id.value }}"
+                 class="profile-text wechat_id">
+        </div>
+        <h3>{{ 'Password:'|t }}</h3>
+        <div class="profile-field">
+          <span>{{ 'Current password:'|t }}</span>
+          <input type="password" placeholder="" name="current_pass" class="profile-text">
+        </div>
+        <div class="profile-field">
+          <span>{{ 'New pasword:'|t }}</span>
+          <input type="password" placeholder="" name="password" class="profile-text">
+        </div>
+        <div class="profile-field">
+          <span>{{ 'Comfirm password:'|t }}</span>
+          <input type="password" placeholder="" name="confirm_pass" class="profile-text">
+        </div>
+        <div class="subcribe-profle">
+          <label>
+            <input type="checkbox" value="1" name="subscriber"
+                   {% if user.user.field_subscribe.value==1 %}checked{% endif %}>
+            {{ 'Subscribe to newsletter'|t }}
+          </label>
+        </div>
+        <button type="submit" class="btn-login">
+          {{ 'Update'|t }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

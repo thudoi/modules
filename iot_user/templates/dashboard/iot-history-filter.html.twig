@@ -1,0 +1,30 @@
+<form action="/account/history" method="get">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-sm-12">
+        <label>Collection</label>
+        <select name="collection">
+          <option value="All">{{ '--All--'|t }}</option>
+          {% for key,collection in collections %}
+            {% if key == col %}
+              <option selected value="{{ key }}">{{ collection }}</option>
+            {% else %}
+              <option value="{{ key }}">{{ collection }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <label>Status</label>
+        <select name="status">
+          <option value="All">{{ '--All--'|t }}</option>
+          <option {% if st == 'true' %} selected {% endif %} value="true">{{ 'Finished'|t }}</option>
+          <option {% if st == 'false' %} selected {% endif %} value="false">{{ 'Unfinished'|t }}</option>
+        </select>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <button type="submit" class="btn btn-primary filter-history">{{ 'Filter'|t }}</button>
+      </div>
+    </div>
+  </div>
+</form>

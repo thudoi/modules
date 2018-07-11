@@ -1,0 +1,19 @@
+<div class="test-hero">
+  <img alt=""
+       src="{{ file_url(collection.collection.field_collection_thumbnail.entity.uri.value | image_style('latest_collection')) }}">
+  <h1 class="test-caption">{{ collection.collection.title.value }}</h1>
+  <div class="test-vote">
+    {{ collection.star_rate }}
+  </div>
+  <div class="test-des">
+    <p><span class="icon-ts icon-view"></span> {{ 'Views:'|t }} {{ collection.views }}</p>
+    <p><span class="icon-ts icon-taken"></span> {% trans %}Tests Taken{% endtrans %}: {{ collection.take_test }}</p>
+    <p><span class="icon-ts icon-calendar"></span> {{ 'Published on:'|t }} {{ collection.collection_date }}</p>
+  </div>
+  {% if(type) %}
+    <div class="test-hero-icon {{ type == 'reading'? 'green': '' }}">
+      <span></span>
+      <p>{{ title }}</p>
+    </div>
+  {% endif %}
+</div>

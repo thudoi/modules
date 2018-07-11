@@ -1,0 +1,379 @@
+<?php
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\node\Entity\Node;
+
+include(drupal_get_path('module', 'iot_quiz') . '/include/hook_form_alter.inc');
+/**
+ * Implements hook_theme().
+ */
+function iot_quiz_theme($existing, $type, $theme, $path) {
+  return [
+    'iot_listening' => [
+      'variables' => [
+        'node' => NULL,
+        'popup_solution' => NULL,
+        'popup_submit' => NULL,
+        'popup_expired' => NULL,
+        'secs' => NULL,
+        'audio' => NULL,
+        'logged_in' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-listening',
+    ],
+    'iot_reading' => [
+      'variables' => [
+        'node' => NULL,
+        'popup_solution' => NULL,
+        'popup_submit' => NULL,
+        'popup_expired' => NULL,
+        'secs' => NULL,
+        'logged_in' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-reading',
+    ],
+    'iot_explain' => [
+      'variables' => [
+        'node' => NULL,
+        'explain' => NULL,
+        'qid' => NULL,
+        'type' => NULL,
+        'listen' => NULL,
+        'print' => NULL,
+        'quiz' => NULL,
+        'nodequiz' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-explain',
+    ],
+    'iot_collection_header' => [
+      'variables' => [
+        'collection' => NULL,
+        'type' => NULL,
+        'title' => NULL,
+      ],
+      'path' => $path . '/templates/collection/',
+      'template' => 'iot-collection-header',
+    ],
+    'iot_solution_listening' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'result' => NULL,
+        'collection_header' => NULL,
+        'audio' => NULL,
+        'score_table' => NULL,
+        'leader_board' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-solution-listening',
+    ],
+    'iot_solution_reading' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'result' => NULL,
+        'collection_header' => NULL,
+        'answers' => NULL,
+        'score_table' => NULL,
+        'leader_board' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-solution-reading',
+    ],
+    'iot_print_listening' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'result' => NULL,
+        'collection_header' => NULL,
+        'audio' => NULL,
+        'score_table' => NULL,
+        'url' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-print-listening',
+    ],
+    'iot_print_reading' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'result' => NULL,
+        'collection_header' => NULL,
+        'answers' => NULL,
+        'score_table' => NULL,
+        'url' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-print-reading',
+    ],
+    'iot_result_listening' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'result' => NULL,
+        'answers' => NULL,
+        'score' => NULL,
+        'collection_header' => NULL,
+        'author' => NULL,
+        'set' => NULL,
+        'mapping' => NULL,
+        'leader_board' => NULL,
+        'score_table' => NULL,
+        'audio' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-result-listening',
+    ],
+    'iot_result_reading' => [
+      'variables' => [
+        'node' => NULL,
+        'secs' => NULL,
+        'result' => NULL,
+        'answers' => NULL,
+        'score' => NULL,
+        'explain' => NULL,
+        'author' => NULL,
+        'set' => NULL,
+        'collection_header' => NULL,
+        'mapping' => NULL,
+        'score_table' => NULL,
+        'leader_board' => NULL,
+
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-result-reading',
+    ],
+    'iot_popup_expired' => [
+      'variables' => ['node' => NULL,],
+      'path' => $path . '/templates/component/',
+      'template' => 'iot-popup-expired',
+    ],
+    'iot_popup_solution' => [
+      'variables' => ['secs' => NULL,],
+      'path' => $path . '/templates/component/',
+      'template' => 'iot-popup-solution',
+    ],
+    'iot_popup_submit' => [
+      'variables' => ['node' => NULL,],
+      'path' => $path . '/templates/component/',
+      'template' => 'iot-popup-submit',
+    ],
+    'iot_radio' => [
+      'variables' => [
+        'data' => NULL,
+        'q_num' => NULL,
+        'q_type' => NULL,
+        'question' => NULL,
+        'answer' => NULL,
+        'explain' => NULL,
+        'print' => NULL,
+      ],
+      'path' => $path . '/templates/question_type/',
+      'template' => 'iot-radio',
+    ],
+    'iot_checkboxes' => [
+      'variables' => [
+        'q_num' => NULL,
+        'q_type' => NULL,
+        'ext_attr' => NULL,
+        'id' => NULL,
+        'opt_value' => NULL,
+        'opt_option' => NULL,
+      ],
+      'path' => $path . '/templates/question_type/',
+      'template' => 'iot-checkboxes',
+    ],
+    'iot_blank' => [
+      'variables' => [
+        'q_num' => NULL,
+        'q_type' => NULL,
+        'ext_attr' => NULL,
+      ],
+      'path' => $path . '/templates/question_type/',
+      'template' => 'iot-blank',
+    ],
+    'iot_dropdown' => [
+      'variables' => [
+        'q_num' => NULL,
+        'q_type' => NULL,
+        'ext_attr' => NULL,
+        'opt' => NULL,
+        'as' => NULL,
+      ],
+      'path' => $path . '/templates/question_type/',
+      'template' => 'iot-dropdown',
+    ],
+    'iot_drag_drop' => [
+      'variables' => ['data' => NULL, 'id' => NULL],
+      'path' => $path . '/templates/question_type/',
+      'template' => 'iot-drag-drop',
+    ],
+    'custom_edit_node_collection' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/form/',
+      'template' => 'custom-edit-node-collection',
+    ],
+    'custom_edit_node_listening_questions' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/form/',
+      'template' => 'custom-edit-node-listening-questions',
+    ],
+    'custom_edit_node_reading_questions' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/form/',
+      'template' => 'custom-edit-node-reading-questions',
+    ],
+    'iot_manage_collection' => [
+      'variables' => ['node' => NULL, 'sets' => NULL],
+      'path' => $path . '/templates/form/',
+      'template' => 'iot-manage-collection',
+    ],
+    'iot_writing_speaking' => [
+      'variables' => ['node' => NULL, 'secs' => NULL],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-writing-speaking',
+    ],
+    'iot_collections' => [
+      'variables' => [
+        'node' => NULL,
+        'collections' => NULL,
+        'terms' => NULL,
+        'category' => NULL,
+        'features' => NULL,
+      ],
+      'path' => $path . '/templates/set_type/',
+      'template' => 'iot-collections',
+    ],
+    'iot_quiz_collection_detail' => [
+      'variables' => [
+        'sets' => NULL,
+        'quizs' => NULL,
+        'otherCollection' => NULL,
+      ],
+      'path' => $path . '/templates/collection/',
+      'template' => 'iot-collection-detail',
+    ],
+    'iot_other_test_ws' => [
+      'variables' => ['nodes' => NULL,],
+      'path' => $path . '/templates/question/',
+      'template' => 'iot-other-test-ws',
+    ],
+    'iot_other_collection_ws' => [
+      'variables' => ['collections' => NULL,],
+      'path' => $path . '/templates/question/',
+      'template' => 'iot-other-collection-ws',
+    ],
+    'iot_other_result' => [
+      'variables' => ['nodes' => NULL,],
+      'path' => $path . '/templates/question/',
+      'template' => 'iot-other-result',
+    ],
+    'iot_leader_board' => [
+      'variables' => ['node' => NULL,],
+      'path' => $path . '/templates/question/',
+      'template' => 'iot-leader-board',
+    ],
+    'iot_result_question' => [
+      'variables' => [
+        'result' => NULL,
+        'type' => NULL,
+        'class' => NULL,
+      ],
+      'path' => $path . '/templates/component/',
+      'template' => 'iot-result-question',
+    ],
+    'iot_listen_here' => [
+      'variables' => ['node' => NULL, 'listen' => NULL,],
+      'path' => $path . '/templates/question/',
+      'template' => 'iot-listen-here',
+    ],
+
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function template_preprocess_iot_collection_header(&$variables) {
+  $data = [];
+  $collection = $variables['collection'];
+  $data['collection'] = $collection;
+  $data['collection_date'] = date('d M Y', strtotime($collection->get('field_publication_date')->value));
+  $vote_widget_service = \Drupal::service('rate.entity.vote_widget');
+  $vote_widget = $vote_widget_service->buildRateVotingWidget($collection->id(), $collection->getEntityTypeId(), $collection->bundle());
+  $collection_service = \Drupal::service('iot_quiz.collectionservice');
+  $statistic = $collection_service->getCollectionStatistic($collection);
+  $data['views'] = $statistic['views'];
+  $data['take_test'] = $statistic['take_test'];
+  $data['star_rate'] = $vote_widget['votingapi_links'];
+  $variables['collection'] = $data;
+}
+
+function iot_quiz_local_tasks_alter(&$local_tasks) {
+  unset($local_tasks['entity.block_content_type.collection']);
+}
+
+/**
+ * Implements hook_preprocess_iot_fill_in_blank().
+ */
+function iot_quiz_preprocess_iot_fill_in_blank(&$variables) {
+  if ($questions = $variables['data']->questions) {
+    foreach ($questions as $question) {
+      $explode = explode('*', $question);
+      $variables['question'] = iot_replace_blank($explode, $variables['id']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_iot_drag_drop().
+ */
+function iot_quiz_preprocess_iot_drag_drop(&$variables) {
+  //  kint($variables['data']);
+}
+
+/**
+ * @param $explode
+ * @param $id
+ *
+ * @return string
+ */
+function iot_replace_blank($explode, $id) {
+  $text = '';
+  foreach ($explode as $key => $value) {
+    if ($key % 2 == 0) {
+      $text .= $value;
+    }
+    else {
+      $input = '<span class="h5p-input-wrapper has-tip">
+                    <input type="text" class="h5p-text-input" autocapitalize="off" data-blank="' . $key . '" data-id="' . $id . '" style="width: 56px;">
+                        <div class="joubel-tip-container" title="Tip" aria-label="Tip" aria-expanded="false" role="button" tabindex="0">
+                            <span class="joubel-icon-tip-normal ">
+                                <span class="h5p-icon-shadow"></span>
+                                <span class="h5p-icon-speech-bubble"></span>
+                                <span class="h5p-icon-info"></span>
+                            </span>
+                        </div>
+                 </span>';
+      $text .= $input;
+    }
+  }
+  return $text;
+}
+
+/**
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function iot_quiz_node_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  $type = $entity->bundle();
+  switch ($type) {
+    case 'collection':
+      $response = new RedirectResponse('/collection/' . $entity->id() . '/manage');
+      $response->send();
+      break;
+  }
+}
+

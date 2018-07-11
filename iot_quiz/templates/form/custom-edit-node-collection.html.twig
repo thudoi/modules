@@ -1,0 +1,32 @@
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+<div class="col-md-6">
+  <div class="colleciton-content">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#collection">{{ 'Collection'|t }}</a></li>
+      <li><a data-toggle="tab" href="#advance">{{ 'Advance'|t }}</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="collection" class="tab-pane fade in active">
+        {{ form.title }}
+        {{ form.field_collection_thumbnail }}
+        {{ form.field_publication_date }}
+        {{ form.field_collection_level }}
+        {{ form.body }}
+      </div>
+      <div id="set" class="tab-pane fade ">
+      </div>
+      <div id="advance" class="tab-pane fade">
+        {{ form.advanced }}
+      </div>
+    </div>
+  </div>
+  {{ form.footer }}
+  <div class="action">
+    {{ form.actions }}
+  </div>
+</div>
+<div class="col-md-6" id="detail">
+  {{ form.field_collection_set }}
+</div>

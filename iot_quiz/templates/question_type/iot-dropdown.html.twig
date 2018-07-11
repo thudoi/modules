@@ -1,0 +1,6 @@
+<span class="number-wrap-inline">
+    <span class="number">{{ q_num }}</span>
+    <select {{ ext_attr }} class="iot-question" data-num="{{ q_num }}" data-q_type="{{ q_type }}"
+                           id="q-{{ q_num }}">{{ opt|raw }}</select>
+  {{ as|raw }}
+</span>

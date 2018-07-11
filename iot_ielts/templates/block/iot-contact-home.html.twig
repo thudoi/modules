@@ -1,0 +1,29 @@
+<div class="contact-box">
+  <div class="error-message main"></div>
+  <form id="contact-form" method="post" enctype="multipart/form-data">
+    <div class="section-caption">
+      <span>{{ 'Contact us'|t }}</span>
+    </div>
+    <div class="contact-field">
+      <input type="text" required name="name" class="contact-name" placeholder="{{ 'Name'|t }}">
+      <div class="error-message contact-name"></div>
+    </div>
+    <div class="contact-field">
+      <input type="email" required class="contact-email" placeholder="{{ 'Email'|t }}">
+      <div class="error-message contact-email"></div>
+    </div>
+    <div class="contact-field">
+      <input type="text" required class="contact-title" placeholder="{{ 'Title'|t }}">
+      <div class="error-message contact-title"></div>
+    </div>
+    <div class="contact-field">
+      <textarea class="contact-message" required placeholder="{{ 'Message'|t }}"></textarea>
+      <div class="error-message contact-message"></div>
+    </div>
+    <div class="contact-field">
+      <button type="submit">{{ 'Send'|t }}</button>
+      <img class="preload" src="/themes/iot/images/preloader.gif" width="50" height="50"/>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,30 @@
+<!-- Add you custom twig html here -->
+<!--section-->
+{% if nodes %}
+  <div class="section-caption">
+    <span>{{ 'Latest IELTS test releases:'|t }}</span>
+  </div>
+  <div class="book-home">
+    <div class="row row-fix">
+      {% for node in nodes %}
+        <div class="col-md-3 col-sm-6 col-xs-12 col-fix">
+          <div class="book-item">
+            <a href="{{ path('entity.node.canonical', {'node': node.collection.nid.value}) }}">
+
+              <img alt=""
+                   src="{{ file_url(node.collection.field_collection_thumbnail.entity.uri.value | image_style('latest_collection')) }}"/>
+            </a>
+            <h3>
+              <a
+                href="{{ path('entity.node.canonical', {'node': node.collection.nid.value}) }}">{{ node.collection.title.value }}</a>
+            </h3>
+            <div class="test-vote small">
+              {{ node.star_rate }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+{% endif %}

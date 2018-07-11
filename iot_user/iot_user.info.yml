@@ -1,0 +1,24 @@
+name: 'IOT User'
+description: 'Custom User Dashboard for IOT'
+type: module
+core: 8.x
+dependencies:
+  - content_translation
+  - datetime
+  - entity_reference_revisions
+  - field
+  - file
+  - image
+  - iot_user
+  - language
+  - menu_ui
+  - node
+  - options
+  - paragraphs
+  - path
+  - taxonomy
+  - text
+  - ultimate_cron
+  - user
+  - views
+version: 8.x-1.5

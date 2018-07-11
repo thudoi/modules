@@ -1,0 +1,21 @@
+<div class="modal fade" id="modal-expired" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     style="display: none;">
+  <div class="modal-dialog modal-auto modal-time-left">
+    <div class="">
+      <i class="ion-android-close close-modal" data-dismiss="modal" aria-label="{{ 'Close'|t }}">
+      </i>
+      <h2 class="modal-caption">
+        {{ 'Time is up'|t }}
+      </h2>
+      <p class="modal-des">{{ 'Please choose the flowing option'|t }}</p>
+      <div class="review-content">
+        <div class="bp-control-time-left ">
+          <a id="submit-test-block" class="submit-test-block"><span></span> {{ 'Submit and Review Answers'|t }}  </a>
+          <a class="btn-continute"> <span></span> {{ 'Continute to finish the test'|t }} </a>
+          <a href="{{ path('entity.node.canonical', {'node': node.nid.value}) }}"
+             class="btn-retake"><span></span> {{ 'Exit the test'|t }} </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

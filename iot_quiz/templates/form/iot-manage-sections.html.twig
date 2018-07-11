@@ -1,0 +1,37 @@
+<div class="content">
+  <h2 class="title">{{ node.title.value }} <span
+      class="glyphicon glyphicon-{{ type=='field_listening_sections'? 'headphones':'text-color' }}"></span></h2>
+</div>
+<div class="practice">
+
+  <a class="use-ajax" data-dialog-type="modal"
+     href="/node/add/{{ type == 'field_listening_sections' ? 'section_listening' : 'section_reading' }}?sid={{ node.nid.value }}&destination=/set/{{ cid }}/{{ node.nid.value }}/manage?field={{ type }}">
+    Add Section</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'Section Title'|t }}</th>
+      <th>{{ 'Manage Questions'|t }}</th>
+      <th colspan=2>{{ 'Action'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sec in secs %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ sec.title.value }}</td>
+        <td><a class="use-ajax" data-dialog-type="modal"
+               href="/node/{{ sec.nid.value }}/edit?destination=/set/{{ cid }}/{{ node.nid.value }}/manage?field={{ type }}&action=manage">{{ 'Questions'|t }}</a>
+        </td>
+        <td><a class="use-ajax" data-dialog-type="modal"
+               href="/node/{{ sec.nid.value }}/edit?destination=/set/{{ cid }}/{{ node.nid.value }}/manage?field={{ type }}&action=edit">{{ 'Edit'|t }}</a>
+        </td>
+        <td><a class="use-ajax" data-dialog-type="modal"
+               href="/node/{{ sec.nid.value }}/delete?destination=/set/{{ cid }}/{{ node.nid.value }}/manage?field={{ type }}&action=edit">{{ 'Delete'|t }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

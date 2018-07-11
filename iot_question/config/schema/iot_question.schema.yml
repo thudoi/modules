@@ -1,0 +1,7 @@
+field.field_settings.iot:
+  type: mapping
+  label: 'IOT settings'
+  mapping:
+    size:
+      type: string
+      label: 'Size'

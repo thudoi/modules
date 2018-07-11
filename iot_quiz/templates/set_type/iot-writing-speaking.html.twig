@@ -1,0 +1,17 @@
+<div class="writing-speaking container">
+  <div class="col-md-8">
+    {{ node.field_question_simple.value|raw }}
+  </div>
+  <div class="col-md-4">
+    <ul>
+      <li><a href="#">{{ 'Listening'|t }}</a></li>
+      <li><a href="#">{{ 'Reading'|t }}</a></li>
+      {% if node.field_quiz_type.value=='writing' %}
+        <li><a href="#">{{ 'Writing'|t }}</a></li>
+      {% endif %}
+      {% if node.field_quiz_type.value=='speaking' %}
+        <li><a href="#">{{ 'Speaking'|t }}</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+{% if node %}
+  <div class="tip-the-day">
+    <p class="ttd-caption">{{ 'IELTS tip of the day:'|t }}</p>
+    <div class="news-item">
+      <a href="{{ path('entity.node.canonical',{'node':node.id}) }}">
+        <img alt=""
+             src="{{ file_url(node.field_image.entity.uri.value | image_style('tips_thumb')) }}">
+      </a>
+      <h3><a href="{{ path('entity.node.canonical',{'node':node.id}) }}">{{ node.title.value }}</a></h3>
+      <div class="test-vote small">
+        {{ rate }}
+      </div>
+      <p>{{ desc }}</p>
+      {% if term %}
+        <a href="{{ term_uri }}" class="mi-tag"><em></em> {{ term.name.value }}
+        </a>
+      {% endif %}
+      <div class="test-des">
+        <p class="hidden-xs"><span class="icon-ts icon-view"></span> {{ views }}</p>
+        <p><span class="icon-ts icon-calendar"></span> {% set date = node.createdtime|date('d M Y') %}{{ date }}</p>
+      </div>
+    </div>
+  </div>
+{% endif %}

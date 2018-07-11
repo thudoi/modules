@@ -1,0 +1,43 @@
+<div class="content">
+  <h2 class="title">{{ node.title.value }}</h2>
+</div>
+<div class="practice">
+
+  {#<a class=" btn btn-primary"  href="/node/add/question?sid={{ node.nid.value }}&type={{ type }}&destination=/quiz/{{ node.nid.value }}/manage"> {{ 'Add Question'|t }}</a>#}
+  <a class=" btn btn-primary"
+     href="/node/add/section?sid={{ node.nid.value }}&type={{ node.field_quiz_type.value }}&destination=/quiz/{{ node.nid.value }}/manage"> {{ 'Add Section'|t }}</a>
+  <a class="btn btn-info" href="/set/{{ node.field_set.target_id }}/manage">{{ 'Back to Set Manager'|t }}</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'Section Title'|t }}</th>
+      <th>{{ 'Question Number Range'|t }}</th>
+      <th>{{ 'Subtitle'|t }}</th>
+      <th>{{ 'Image'|t }}</th>
+      <th>{{ 'Question Type'|t }}</th>
+      <th>{{ 'Manage Questions'|t }}</th>
+      <th colspan=2>{{ 'Actions'|t }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sec in questions %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td><a href="/question/{{ sec.nid.value }}/manage">{{ sec.field_title_ui.value }}</a></td>
+        <td>{{ sec.field_question_range.value }}</td>
+        <td>{{ sec.field_subtitle_section.value }}</td>
+        <td><img width="100" height="auto" src="{{ file_url(sec.field_image.0.entity.uri.value) }}"/></td>
+        <td style="text-transform: uppercase">{{ sec.field_section_type.value }}</td>
+        <td><a class="btn btn-primary" href="/question/{{ sec.nid.value }}/manage">{{ 'Manage Question'|t }}</a></td>
+        <td><a class=" btn btn-success"
+               href="/node/{{ sec.nid.value }}/edit?destination=/quiz/{{ node.nid.value }}/manage">{{ 'Edit'|t }}</a>
+        </td>
+        <td><a class="btn btn-danger"
+               href="/node/{{ sec.nid.value }}/delete?destination=/quiz/{{ node.nid.value }}/manage">{{ 'Delete'|t }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      {{ collection_header }}
+      <div class="user-box">
+        <!---box-->
+        <div class="box-caption box-caption-margin">
+          <p><span class="bc-icon icon-lego"></span> {{ 'Answer Keys:'|t }} </p>
+          <div class="bc-right">
+            <a class="use-ajax" data-dialog-type="modal" href="/report/{{ node.nid.value }}/mistake"
+               class="report">{{ 'Report Mistake'|t }}</a>
+          </div>
+        </div>
+        {{ score_table }}
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+      <div class="hidden-lg hidden-md">
+        <div class="box-caption box-caption-margin text-center">
+          <p>{{ 'Review your test now?'|t }}</p>
+        </div>
+        <div class="reviews-test-mobile">
+          <div class="icon-review">
+          </div>
+          <a class="btn-show-re" href="#"><span></span> {{ 'Enter Review & Explanations'|t }} </a>
+        </div>
+      </div>
+      {{ leader_board }}
+    </div>
+  </div>
+</div>
+{#close firt wrapper#}
+<section class="review-explanation hidden-sm hidden-xs">
+  <div class="container-fluid">
+    <div class="box-caption box-caption-white">
+      <p><span class="bc-icon icon-review"></span>{{ 'Review & Explanations:'|t }} </p>
+      <div class="close-rx">
+        <span></span>
+        <span class="last"></span>
+      </div>
+    </div>
+    <div class="reading-box-embeb">
+      <div class="reading-box api">
+
+        <div id="slpit-one" class="split split-item">
+          <div class="split-left">
+            {% for sec in secs %}
+              <div id="set-question-{{ loop.index }}"
+                   class="tab-section-question-reading {{ loop.index==1? 'active':'hidden' }}">
+                <div class="sl-caption">
+                  <span>{{ sec.section.field_title_ui.value }}: {{ sec.section.field_question_range.value }}</span>
+                </div>
+                {#Question item#}
+                <div class="sec-content-{{ loop.index }} ">
+                  {% for key,question in sec.questions %}
+                    <div class="question question-{{ loop.index }}">{{ question.content|raw }}</div>
+
+                  {% endfor %}
+                </div>
+                {#section button#}
+                <div class="sl-caption sl-caption-bottom">
+                  <div class="sl-caption-right">
+                    {% if loop.index - 1 > 0 %}
+                      <a data="{{ loop.index - 1 }}" href="#section-{{ loop.index - 1 }}"
+                         class="btn-section actions-section">
+                        {{ 'Previous Section'|t }}
+                      </a>
+                    {% endif %}
+                    {% if loop.index + 1 <= 3 %}
+                      <a data="{{ loop.index + 1 }}" href="#section-{{ loop.index + 1 }}"
+                         class="btn-section actions-section">
+                        {{ 'Next Section'|t }}
+                      </a>
+                    {% endif %}
+                  </div>
+                  <span>{{ sec.section.field_title_ui.value }}</span>
+                  <h2>{{ sec.section.field_question_range.value }}</h2>
+                </div>
+              </div>
+            {% endfor %}
+
+          </div>
+        </div>
+        <div id="slpit-two" class="split split-item">
+          <div class="split-right">
+            {% for sec in secs %}
+              <div id="set-container-{{ loop.index }}"
+                   class="tab-section-reading {{ loop.index==1? 'active':'hidden' }}">
+                <div class="passage-description"> {{ sec.section.field_passage_desc.value|raw }}</div>
+                <div class="section-image"><img style="max-width:100%" height="auto"
+                                                src="{{ file_url(sec.section.field_image.0.entity.uri.value) }}"/>
+                </div>
+                <h2 class="subtitle"> {{ sec.section.field_subtitle_section.value|raw }}</h2>
+                <div class="passage-content"> {{ sec.section.field_passage_explain.value|raw }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div id="stopwatch" class="hidden"></div>

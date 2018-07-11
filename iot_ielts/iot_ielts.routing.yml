@@ -1,0 +1,152 @@
+
+iot_ielts.set_controller_set:
+    path: '/set/{nid}/manage'
+    defaults:
+      _title: 'Manage Quiz'
+      _controller: '\Drupal\iot_ielts\Controller\SetController::Set'
+    requirements:
+      _access: 'TRUE'
+iot_ielts.set_controller_quiz:
+    path: '/quiz/{nid}/manage'
+    defaults:
+      _title: 'Manage Section'
+      _controller: '\Drupal\iot_ielts\Controller\SetController::Quiz'
+    requirements:
+      _access: 'TRUE'
+iot_ielts.question:
+ path: '/question/{node}/manage'
+ defaults:
+   _title: 'Manage Questions'
+   _form: '\Drupal\iot_ielts\Form\ManageQuestion'
+ options:
+    parameters:
+      node:
+        type: entity:node
+ requirements:
+   _permission: 'access content'
+
+iot_ielts.tips_import:
+ path: '/admin/tips/import'
+ defaults:
+   _title: 'Import tips'
+   _controller: '\Drupal\iot_ielts\Controller\TipsController::import'
+ requirements:
+   _permission: 'access content'
+
+iot_ielts.tips_update_count:
+ path: '/admin/tips/update/count'
+ defaults:
+   _title: 'Import tips'
+   _controller: '\Drupal\iot_ielts\Controller\TipsController::updateCount'
+ requirements:
+   _permission: 'access content'
+
+collection.manage:
+  path: '/collection/{nid}/manage'
+  defaults:
+    _title: 'Manage Set'
+    _controller: '\Drupal\iot_ielts\Controller\SetController::Collection'
+  requirements:
+    _access: 'TRUE'
+    nid: \d+
+section.explain:
+  path: '/section/{node}/explain'
+  defaults:
+    _title: 'Manage Explain'
+    _controller: '\Drupal\iot_ielts\Controller\ExplainController::ExplainSection'
+    options:
+        parameters:
+          node:
+            type: entity:node
+  requirements:
+    _access: 'TRUE'
+iot_ielts.contact_form:
+    path: '/contact/form'
+    defaults:
+      _title: 'Contact form submit'
+      _controller: '\Drupal\iot_ielts\Controller\ContactController::Contact'
+    requirements:
+      _access: 'TRUE'
+iot_ielts.subscriber_form:
+    path: '/subscriber/callback'
+    defaults:
+      _title: 'Contact form submit'
+      _controller: '\Drupal\iot_ielts\Controller\ContactController::subscriberCallback'
+    requirements:
+      _access: 'TRUE'
+iot_ielts.contact_form_page:
+    path: '/contact-us'
+    defaults:
+      _title: 'Contact us'
+      _controller: '\Drupal\iot_ielts\Controller\ContactController::ContactUs'
+    requirements:
+      _access: 'TRUE'
+iot_ielts.report_mistake:
+    path: '/report/{node}/mistake'
+    defaults:
+      _title: 'Report Mistakes'
+      _controller: '\Drupal\iot_ielts\Controller\ReportController::reportMistake'
+    options:
+        parameters:
+          node:
+            type: entity:node
+    requirements:
+      _access: 'TRUE'
+ot_ielts.report_mistake_view:
+    path: '/report/{node}/view'
+    defaults:
+      _title: 'Report Mistakes'
+      _controller: '\Drupal\iot_ielts\Controller\ReportController::reportMistakeView'
+    options:
+        parameters:
+          node:
+            type: entity:node
+    requirements:
+      _access: 'TRUE'
+iot_ielts.report_mistake_callback:
+    path: '/report/mistake/callback'
+    defaults:
+      _title: 'Report Mistake'
+      _controller: '\Drupal\iot_ielts\Controller\ReportController::reportMistakeCallback'
+    requirements:
+      _access: 'TRUE'
+iot_ielts.report_view_callback:
+    path: '/report/view/callback'
+    defaults:
+      _title: 'Report Mistake'
+      _controller: '\Drupal\iot_ielts\Controller\ReportController::reportViewCallback'
+    requirements:
+      _access: 'TRUE'
+ot_ielts.report_mistake_resolved:
+    path: '/report/{node}/resolved'
+    defaults:
+      _title: 'Report Mistakes'
+      _controller: '\Drupal\iot_ielts\Controller\ReportController::reportMistakeResolved'
+    options:
+        parameters:
+          node:
+            type: entity:node
+    requirements:
+      _access: 'TRUE'
+iot_ielts.update_counter_quiz:
+ path: '/quiz/{node}/counter/update'
+ defaults:
+   _title: 'Update views'
+   _form: '\Drupal\iot_ielts\Form\UpdateCounter'
+ options:
+     parameters:
+       node:
+         type: entity:node
+ requirements:
+   _permission: 'access content'
+iot_ielts.update_counter_collection:
+ path: '/collection/{node}/counter/update'
+ defaults:
+   _title: 'Update views'
+   _form: '\Drupal\iot_ielts\Form\UpdateCounterCollection'
+ options:
+     parameters:
+       node:
+         type: entity:node
+ requirements:
+   _permission: 'access content'

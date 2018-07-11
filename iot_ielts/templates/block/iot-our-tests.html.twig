@@ -1,0 +1,19 @@
+<!-- Add you custom twig html here -->
+{% if nodes %}
+  <div class="section-caption">
+    <span>{{ 'Why use IELTS Online Tests?'|t }}</span>
+  </div>
+  <div class="row">
+    {% for node in nodes %}
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="our-test-item">
+          <div class="ot-icon">
+            <img alt="" src="{{ file_url(node.field_image.0.entity.uri.value) }}">
+          </div>
+          <h3>{{ node.title.value }}</h3>
+          {{ node.body.value|raw }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.collection.body
+    - field.field.node.collection.field_author
+    - field.field.node.collection.field_category
+    - field.field.node.collection.field_collection_count
+    - field.field.node.collection.field_collection_level
+    - field.field.node.collection.field_collection_order
+    - field.field.node.collection.field_collection_thumbnail
+    - field.field.node.collection.field_publication_date
+    - field.field.node.collection.field_series
+    - node.type.collection
+  module:
+    - text
+    - user
+id: node.collection.teaser
+targetEntityType: node
+bundle: collection
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+  rate_vote_widget:
+    weight: 100
+    region: content
+hidden:
+  field_author: true
+  field_category: true
+  field_collection_count: true
+  field_collection_level: true
+  field_collection_order: true
+  field_collection_thumbnail: true
+  field_publication_date: true
+  field_series: true
+  langcode: true

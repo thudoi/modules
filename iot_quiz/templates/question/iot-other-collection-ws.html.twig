@@ -1,0 +1,29 @@
+{% if collections %}
+  <div class="other-module">
+    <div class="box-caption box-caption-margin">
+      <p>{{ 'Other test:'|t }} </p>
+    </div>
+    <div class="book-item-wrap">
+      <div class="row row-fix">
+        {% for collection in collections %}
+          <div class="col-md-3 col-sm-6 col-xs-12 col-fix">
+            <div class="book-item">
+              <a href="{{ path('entity.node.canonical', {'node': collection.collection.id}) }}">
+                <img alt=""
+                     src="{{ file_url(collection.collection.field_collection_thumbnail.entity.uri.value | image_style('latest_collection')) }} ">
+              </a>
+              <h3>
+                <a
+                  href="{{ path('entity.node.canonical', {'node': collection.collection.id}) }}">{{ collection.collection.title.value }}</a>
+              </h3>
+              <div class="test-vote small">
+                {{ collection.star_rate }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+{% endif %}

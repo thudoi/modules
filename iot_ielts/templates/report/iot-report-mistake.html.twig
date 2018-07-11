@@ -1,0 +1,58 @@
+<div id="modal-report-mistake" class="modal-auto modal-profile">
+  <div class="">
+    <i class="ion-android-close close-modal" data-dismiss="modal" aria-label="Close">
+    </i>
+    <h2 class="modal-caption report-mistake">
+      {{ 'Found a mistake? Let us know!'|t }}
+    </h2>
+    <div class="des-in">
+      <p>{{ 'Please describe a mistake as details as posible along with your expected correction, leave your email so we can contact with you when needed.'|t }}</p>
+    </div>
+
+    <div class="build-profile ">
+      <div class="error-message main"></div>
+      <form id="report-mistake" method="post" action="/report/mistake/callback">
+        <div class="st2-item">
+          <span class="text-long">{{ 'What question is wrong?'|t }}</span>
+          <select class="question" name="question">
+            {% for key,value in number %}
+              <option {% if qid==key %} selected {% endif %} value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="st2-item">
+          <span class="text-long">{{ 'Please describe exactly what is wrong'|t }}<i class="required">*</i>:</span>
+          <textarea required class="area-wrong" name="describe-area" cols="10"></textarea>
+          <div class="error-message report-message"></div>
+        </div>
+        <div class="st2-item">
+          <div class="row">
+            <div class="col-sm-6">
+
+              <input type="text" class="yourname" value="{% if name %}{{ name }}{% endif %}"
+                     placeholder="{{ 'Your Name'|t }}">
+
+
+            </div>
+            <div class="col-sm-6">
+              <input required type="email" class="email" value="{% if user %}{{ user.mail.value }}{% endif %}"
+                     placeholder="{{ 'Email (*)'|t }}">
+              <div class="error-message report-email"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bp-control text-center">
+          <button type="submit" class="procced-submit-report">{{ 'Submit'|t }} </button>
+          <img class="preload" src="/themes/iot/images/preloader.gif" width="50" height="50"/>
+        </div>
+        <div class="pb-footer">
+          <img alt="" src="/themes/iot/images/logo.svg"/>
+        </div>
+        <input type="hidden" value="{{ node.nid.value }}" class="quiz">
+        <input type="hidden" value="{{ collection.nid.value }}" class="collection">
+        <input type="hidden" value="{{ url }}" class="url">
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="sl-item type_radio" data-num="{{ q_num }}" data-q_type="{{ q_type }}" id="q-{{ q_num }}">
+  <div class="flex question-title-group">
+    <div class="number">{{ q_num }}</div>
+    <div class="question-title">{{ question|raw }}</div>
+  </div>
+  <ul class="list-question">
+    {% for dat in data %}
+      <li>
+    <span>
+        <span class="lq-number">{{ dat.opt_value }}</span>
+        <span class="my-radio">
+            <input type="radio" {{ dat.ext_attr }} id="Choice-{{ dat.id }}-{{ dat.opt_value }}" name="q-{{ q_num }}"
+                   value="{{ dat.opt_value }}">
+            <label for="Choice-{{ dat.id }}-{{ dat.opt_value }}">{{ dat.opt_option }}</label>
+        </span>
+    </span>
+      </li>
+    {% endfor %}
+  </ul>
+  {% if answer %}
+    {% if print != 'print' %}
+      <div><span class="answer"> Answer: <span class="b-r">{{ answer }}</span></span> {{ explain }}</div>
+    {% endif %}
+  {% endif %}
+</div>

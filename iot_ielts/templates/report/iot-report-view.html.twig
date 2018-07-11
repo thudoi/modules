@@ -1,0 +1,108 @@
+<script src="/themes/iot/js/tinymce/tinymce.min.js"></script>
+<script>tinymce.init({selector: 'textarea'});</script>
+<div id="modal-report-mistake" class="modal-auto modal-profile">
+  <div class="">
+    <i class="ion-android-close close-modal" data-dismiss="modal" aria-label="Close">
+    </i>
+    <div class="report-detail container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p><strong>{{ 'Collection'|t }}:</strong> {{ collection.title.value }}</p>
+        </div>
+        <div class="col-sm-4">
+          <p><strong>{{ 'Quiz'|t }}:</strong> {{ quiz.field_title_ui.value }}</p>
+        </div>
+        <div class="col-sm-2">
+          <p><strong>{{ 'Question number'|t }}:</strong> {{ number }}</p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-sm-6">
+          <p><strong>{{ 'Name'|t }}:</strong> {{ name }}</p>
+        </div>
+        <div class="col-sm-4">
+          <p><strong>{{ 'Email'|t }}:</strong> {{ email }}</p>
+        </div>
+        <div class="col-sm-2">
+          <p><strong>{{ 'Date'|t }}:</strong> {% set date = node.createdtime|date('d/m/Y h:i:s') %}{{ date }}
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-sm-10">
+          <p><strong>{{ 'Url'|t }}:</strong> <a href="{{ url }}" target="_blank">{{ url }}</a></p>
+        </div>
+        <div class="col-sm-2">
+          <p><strong>{{ 'Resolved'|t }}
+              :</strong> {% if node.status.value == 1 %} {{ 'Yes'|t }} {% else %} {{ 'No'|t }}{% endif %}
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <span><strong>{{ 'Content'|t }}</strong></span>
+        <div class="content">
+          {{ node.field_description.value }}
+        </div>
+
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="build-profile ">
+    <div class="error-message main"></div>
+    <form id="report-view" method="post" action="/report/view/callback">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="st2-item">
+            <input required type="text" class="subject" name="subject"
+                   value="Re: Mistake for {{ collection.title.value }} - {{ quiz.field_title_ui.value }}"
+                   placeholder="{{ 'Subject'|t }}">
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-12">
+          <div class="st2-item">
+              <textarea id="report-reply-message" required class="message ckeditor"
+                        placeholder="Reply message goes here." name="message"
+                        cols="10">
+                  <p>Hi {% if name %}{{ name }}{% else %}{{ email }}{% endif %} </p>
+                  <p>Thanks for your feedback. We've fixed the issue. If you spot similar mistake, please let us know, we will be very appreciate your action.</p>
+                  <p>Best regards,</p>
+                  <p>IOT Team</p>
+                 <p>{% set date = node.createdtime|date('d/m/Y h:i:s') %}{{ date }} {{ name }} <{{ email }}>:</p>
+<blockquote class="gmail_quote" style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<div>
+{{ node.field_description.value }}
+</div>
+</blockquote>
+              </textarea>
+
+            <div class="error-message report-message"></div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+      </div>
+
+      <div class="bp-control text-center">
+        <div class="right-message"></div>
+        <button type="submit" class="procced-submit-report">{{ 'Send Reply'|t }} </button>
+        {% if node.status.value ==0 %}
+          <a href="/report/{{ node.nid.value }}/resolved">{{ 'Mark as Resolved'|t }} </a>
+        {% endif %}
+        <a href="/node/{{ node.nid.value }}/delete?destination=/admin/report/mistake">{{ 'Delete'|t }} </a>
+        <img class="preload" src="/themes/iot/images/preloader.gif" width="50" height="50"/>
+      </div>
+      <input type="hidden" value="{{ email }}" name="email" class="email">
+    </form>
+  </div>
+
+</div>
+</div>

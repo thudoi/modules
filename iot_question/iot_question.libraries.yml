@@ -1,0 +1,7 @@
+question_backend:
+  version: VERSION
+  js:
+      js/question-backend.js: {}
+  css:
+    layout:
+      css/question-backend.css: {}

@@ -1,0 +1,11 @@
+excluded:
+  - core.entity_form_display.paragraph.speaking.default
+  - core.entity_view_display.paragraph.speaking.default
+  - field.field.paragraph.speaking.field_sample_answer
+  - field.field.paragraph.speaking.field_test_intro
+  - field.field.paragraph.writing.field_sample_answer
+  - field.field.paragraph.writing.field_test_intro
+  - field.storage.paragraph.field_sample_answer
+  - field.storage.paragraph.field_sr_question
+  - field.storage.paragraph.field_test_intro
+required: true

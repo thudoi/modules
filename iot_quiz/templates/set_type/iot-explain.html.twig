@@ -1,0 +1,88 @@
+{% if print !='print' %}
+  {% if type == 'reading' %}
+    <div class="sl-item explaination">
+
+      <div class="sl-control">
+        {#<a title=" Ask Tutor" href="javascript:void(0)">#}
+        {#<span class="icon-ask"></span>#}
+        {#Ask Tutor#}
+        {#</a>#}
+        {% if qid in quiz|keys %}
+          {% set question = qid|split('-') %}
+
+          <a class="locate-explain" data="explainq{{ question[0] }}" title="Locate" href="javascript:void(0)">
+            <span class="icon-locale"></span>
+            {{ 'Locate'|t }}
+          </a>
+        {% endif %}
+        {% if explain[qid] != '' %}
+          <a class="explanation-click" title="{{ 'Explain'|t }}" data-toggle="collapse"
+             data-target="#col-{{ qid }}"
+             href="javascript:void(0)">
+            <span class="icon-explain"></span>
+            {{ 'Explain'|t }}
+          </a>
+        {% endif %}
+        {% set question = qid|split('-') %}
+
+        <a class="locate-explain hide-mobile use-ajax " data-dialog-type="modal"
+           href="/report/{{ nodequiz.nid.value }}/mistake?qid={{ question[0] }}&url={{ url('<current>') }}">
+          <i class="fa fa-exclamation-triangle"></i>
+          {{ 'Report'|t }}
+        </a>
+      </div>
+      {% if explain[qid] != '' %}
+        <div id="col-{{ qid }}" class="collapse">{{ explain[qid]|raw }}</div>
+      {% endif %}
+
+    </div>
+  {% else %}
+
+    <div class="sl-item explaination">
+      <div class="sl-control">
+        {% if listen[qid] %}
+          <a class="listen-from-here" data="{{ listen[qid] }}" href="#">
+            <span class="icon-listen"></span>
+            {{ 'Listen from here'|t }}
+          </a>
+        {% endif %}
+        {% if qid in quiz|keys %}
+          {% set question = qid|split('-') %}
+
+          <a class="locate-explain" data="explainq{{ question[0] }}" href="#">
+            <span class="icon-locale"></span>
+            {{ 'Locate'|t }}
+          </a>
+        {% endif %}
+        {#<a href="#">#}
+        {#<span class="icon-ask"></span>#}
+        {#Ask Tutor#}
+        {#</a>#}
+        {% if explain[qid] != '' %}
+          <a title="{{ 'Explain'|t }}" class="explanation-click" data-toggle="collapse"
+             data-target="#col-{{ qid }}"
+             href="javascript:void(0)">
+            <span class="icon-explain"></span>
+            {{ 'Explain'|t }}
+
+          </a>
+        {% endif %}
+
+        {% set question = qid|split('-') %}
+
+        <a class="locate-explain hide-mobile use-ajax " data-dialog-type="modal"
+           href="/report/{{ nodequiz.nid.value }}/mistake?qid={{ question[0] }}&url={{ url('<current>') }}">
+          <i class="fa fa-exclamation-triangle"></i>
+          {{ 'Report'|t }}
+        </a>
+
+
+      </div>
+      {% if explain[qid] != '' %}
+        <div id="col-{{ qid }}" class="collapse">{{ explain[qid]|raw }}</div>
+      {% endif %}
+    </div>
+
+  {% endif %}
+{% endif %}
+

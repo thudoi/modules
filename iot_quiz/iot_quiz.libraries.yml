@@ -1,0 +1,45 @@
+iot_frontend:
+  version: VERSION
+  js:
+      js/mediaelement-and-player.min.js: {}
+      js/frontend.js: {}
+      js/result.js: {}
+      js/jspdf.js: {}
+      js/pdfFromHTML.js: {}
+      js/mep-feature-playlist.js: {}
+  css:
+    layout:
+      css/frontend.css: {}
+      css/progression-player.css: {}
+iot_result:
+  version: VERSION
+  js:
+      js/mediaelement-and-player.min.js: {}
+      js/result.js: {}
+      js/frontend.js: {}
+      js/reading.js: {}
+      js/mep-feature-playlist.js: {}
+  css:
+    layout:
+      css/frontend.css: {}
+      css/result.css: {}
+      css/single.css: {}
+      css/progression-player.css: {}
+reading_front:
+  version: VERSION
+  js:
+      js/reading.js: {}
+  dependencies:
+      - core/jquery
+      - core/jquery.ui.tabs
+iot_printpdf:
+  version: VERSION
+  js:
+      js/jspdf.js: {}
+      js/html2pdf.js: {}
+      js/pdfFromHTML.js: {}
+      js/print.js: {}
+  css:
+    layout:
+      css/frontend.css: {}
+      css/print.css: {}

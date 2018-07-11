@@ -1,0 +1,16 @@
+{
+    "name": "drupal/iot_ielts",
+    "type": "drupal-module",
+    "description": "This is custom module for IELTS hook",
+    "keywords": [
+        "Drupal"
+    ],
+    "license": "GPL-2.0+",
+    "homepage": "https://www.drupal.org/project/iot_ielts",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/iot_ielts",
+        "source": "http://cgit.drupalcode.org/iot_ielts"
+    },
+    "require": {}
+}

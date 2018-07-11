@@ -1,0 +1,133 @@
+.field--name-field-option {
+  width: 35%;
+  float: left;
+  margin: 0 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-value {
+  width: 35%;
+  float: left;
+  margin: 0 20px 0 0 !important;
+  padding: 0;
+}
+
+.tabledrag-handle {
+  color: #777;
+  cursor: move;
+  float: left;
+  font-size: 125%;
+  line-height: 1;
+  margin: 13px 0 0 -10px !important;
+  padding: 10px;
+}
+
+.node-block-edit-form .draggable .form-actions,
+.node-block-form .draggable .form-actions {
+  margin-top: 10px;
+}
+
+.field--type-text-long {
+  width: 100%;
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+
+.field--name-field-value {
+  width: 35%;
+  float: none;
+  margin: 0 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-option {
+  width: 25%;
+  float: left;
+  margin: 0 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-value {
+  width: 25%;
+  float: left;
+  margin: 0 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-correct {
+  width: 10%;
+  float: left;
+  margin: 10px 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-correct legend {
+  display: none;
+}
+
+.field--name-field-number {
+  width: 20%;
+  margin: 5px 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-correct-checkbox {
+  width: 10%;
+  float: left;
+  margin: 10px 20px 0 0 !important;
+  padding: 0;
+}
+
+.field--name-field-correct-checkbox legend {
+  display: none;
+}
+
+.hidden-editing, .field--name-field-correct legend, .field--name-field-correct-checkbox legend {
+  display: none;
+}
+
+.field--name-field-correct {
+  width: 10%;
+  float: left;
+  margin-right: 20px;
+}
+
+.bulk-adding {
+  display: none;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.bulk-adding:nth-child(1) {
+  display: block !important;
+}
+
+.field--name-field-checkbox .paragraph-type-title,
+.field--name-field-radios .paragraph-type-title,
+.field--name-field-dropdown .paragraph-type-title {
+  display: none;
+}
+
+.field--name-field-checkbox .paragraph-type-top,
+.field--name-field-radios .paragraph-type-top,
+.field--name-field-dropdown .paragraph-type-top {
+  float: right;
+  width: 30%;
+}
